@@ -18,6 +18,7 @@ main/deploy/updates/*
 !main/deploy/updates/README.txt
 
 node_modules/
+.idea
 
 packagehash.txt
 
