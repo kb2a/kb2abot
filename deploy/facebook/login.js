@@ -1,3 +1,5 @@
+import login from "facebook-chat-api"
+
 /**
  * @param  {cookie: string}7 credential Credential for login via Facebook
  * @param  {}

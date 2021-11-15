@@ -9,11 +9,12 @@ import translate from "./util/translate"
 import CommandManager from "./CommandManager"
 
 export default class Command {
-	childs = new CommandManager()
+	childs = new CommandManager(this)
 
 	constructor(options = {}) {
-		const { plugin } = options
+		const { plugin, parentCmd } = options
 		this.plugin = plugin
+		this.parentCmd = parentCmd
 		this.cache = new NodeCache({
 			stdTTL: 600
 		})
