@@ -1,28 +1,41 @@
-import fs from "fs"
-import path from "path"
-const importJSON = pathToJson => {
-	return JSON.parse(fs.readFileSync(pathToJson))
-}
-import getDirname from "es-dirname"
-import translate from "util/translate.js"
+// import fs from "fs"
+// import path from "path"
+// const importJSON = pathToJson => {
+// 	return JSON.parse(fs.readFileSync(pathToJson))
+// }
+// import getDirname from "es-dirname"
+import NodeCache from "node-cache"
+import translate from "./util/translate"
+import CommandManager from "./CommandManager"
 
 export default class Command {
-	constructor(options) {
+	childs = new CommandManager()
+
+	constructor(options = {}) {
 		const { plugin } = options
 		this.plugin = plugin
-		this.cache = {}
+		this.cache = new NodeCache({
+			stdTTL: 600
+		})
+	}
+
+	// Called after this command is inited (like an async constructor)
+	async load() {
+		// const Command = (await import("../..")).default
+		// await this.childs.add(new Command())
 	}
 
 	// overide
 	onCall(sender, args, sendMessage) {}
 
 	getMetadata(locale = process.env.DEFAULT_LOCALE) {
-		if (this.cache.metadata)
-			return this.cache.metadata
-		this.cache.metadata = {
+		const metadata = this.cache.get("metadata")
+		if (metadata)
+			return metadata
+		this.cache.set("metadata", {
 			keywords: [],
 			description: translate("description", locale),
 			usage: translate("usage", locale)
-		}
+		})
 	}
 }

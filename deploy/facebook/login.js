@@ -1,3 +1,8 @@
+/**
+ * @param  {cookie: string}7 credential Credential for login via Facebook
+ * @param  {}
+ * @return {[type]}
+ */
 export default (credential, config) => {
 	let unofficialAppState
 	if (isUsingCookie(credential)) {

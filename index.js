@@ -22,7 +22,10 @@ const botList = fs
         (name.includes(".txt") && name != "README.txt") ||
         name.includes(".json")
     )
-if (botList.length == 0) return console.newLogger.error("There is no cookies in /bots")
+if (botList.length == 0) {
+    console.newLogger.error("There is no cookies in /bots")
+    process.exit()
+}
 
 
 process.on("uncaughtException", function(err) {

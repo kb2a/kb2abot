@@ -384,3 +384,20 @@ export const deepEqual = (x, y) => {
 }
 
 export const importJSON = pathToJson => JSON.parse(fs.readFileSync(pathToJson))
+
+export function getCallerFile() {
+	let originalFunc = Error.prepareStackTrace
+	let callerfile
+	try {
+		let err = new Error()
+		let currentfile
+		Error.prepareStackTrace = function (err, stack) { return stack }
+		currentfile = err.stack.shift().getFileName()
+		while (err.stack.length) {
+			callerfile = err.stack.shift().getFileName()
+			if (currentfile !== callerfile) break
+		}
+	} catch {}
+	Error.prepareStackTrace = originalFunc
+	return callerfile
+}

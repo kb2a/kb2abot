@@ -1,121 +1,76 @@
-export default async (message) => {
-	const reply = (message, threadID, callback, messageID) => {
-		this.sendMessage(
-			message,
-			threadID || message.threadID,
-			callback,
-			messageID || message.messageID
-		)
+import Thread from "./models/Thread"
+
+export default async function hook(message) {
+	const reply = (message, threadID, messageID) => {
+		return new Promise(async resolve => {
+			const lang = await detect(message)
+			if (lang != process.env.DEFAULT_LOCALE)
+				message = await google(message, lang, process.env.DEFAULT_LOCALE)
+			this.sendMessage(
+				message,
+				threadID || message.threadID,
+				resolve,
+				messageID || message.messageID
+			)
+		})
 	}
 
-}
-
-export function executeCommand(sender, command, args, reply) {
-	command.onCall()
-}
-
-export async function a(message) {
-	if (!message || !message.threadID || !message.body) return
-	message.body = message.body.trim()
-
-
-
-	const thread = kb2abot.account.addThread(message.threadID)
-
-	for (const command of kb2abot.pluginManager.getAllCommands()) {
-		const commandName = command.keywords[0]
-		if (!command._.extendedDatastoreDesigns.includes(thread.id)) {
-			kb2abot.account.storage = {
-				...command.datastoreDesign.account.global,
-				...kb2abot.account.storage
-			} // account.global
-			kb2abot.account.storage[commandName] = {
-				...command.datastoreDesign.account.local,
-				...kb2abot.account.storage[commandName]
-			} // account.local
-			thread.storage = {
-				...command.datastoreDesign.thread.global,
-				...thread.storage
-			} // thread.global
-			thread.storage[commandName] = {
-				...command.datastoreDesign.thread.local,
-				...thread.storage[commandName]
-			} // thread.local
-			command._.extendedDatastoreDesigns.push(thread.id)
-		}
+	let thread
+	try {
+		thread = await Thread.findOne({ id: message.threadID })
+	} catch {
+		thread = new Thread({
+			id: message.threadID
+		})
 	}
 
-	if (Date.now() <= thread.storage.blockTime) return
-
-	if (message.body.indexOf(thread.storage.prefix) == 0) {
+	if (message.body.indexOf(thread.prefix) == 0) {
 		// is using command ==>
-		const keyword = message.body.split(' ')[0].slice(1) // lấy keyword của message
-		if (keyword) {
-			if (keyword.includes('.')) {
-				const command = kb2abot.pluginManager.findCommandsByClasses(keyword)
-				if (command)
-					await executeCommand({
-						reply,
-						message,
-						thread,
-						type: 'onCall',
-						command
-					})
-				else
-					reply(
-						`Không tìm thấy lệnh: "${keyword}"\n Vui lòng xem lại tên lệnh!`
-					)
-			} else {
-				const found = kb2abot.pluginManager.findCommandsByKeyword(keyword)
-				if (found.length == 0) {
-					const allKeywords = []
-					for (const cmd of kb2abot.pluginManager.getAllCommands()) {
-						allKeywords.push(...cmd.keywords)
-					}
-					const { ratings } = stringSimilarity.findBestMatch(
-						keyword,
-						allKeywords
-					)
-					ratings.sort((a, b) => b.rating - a.rating)
-					const bestMatches = [
-						ratings[0].target,
-						ratings[1].target,
-						ratings[2].target
-					]
-					reply(
-						`Không tìm thấy lệnh: "${keyword}"\nCác lệnh gần giống: ${bestMatches.join(
-							', '
-						)}\nBạn có thể xem danh sách lệnh ở ${thread.storage.prefix}help!`
-					)
-				}
-
-				if (found.length == 1)
-					await executeCommand({
-						reply,
-						message,
-						thread,
-						type: 'onCall',
-						command: found[0].command
-					})
-				if (found.length > 1) {
-					const names = []
-					for (const f of found)
-						if (!f.className.includes('.'))
-							names.push('kb2abot.' + f.className)
-					else names.push(f.className)
-					reply(
-						`Có ${found.length} lệnh: ${names.join(
+		const keyword = message.body.split(' ')[0].slice(thread.prefix.length) // lấy keyword của message
+		const address = keyword.split(".")
+		let found = false
+		for (let i = 0; i < this.plugins.length; i++) {
+			const plugin = this.plugins[i]
+			const commands = plugin.recursiveFind(address)
+			if (commands.length > 0)
+				found = true
+			if (commands.length == 1) {
+				commands[0].onCall(sender, args, reply)
+			}
+			if (command.length > 1) {
+				const names = []
+				for (const f of commands)
+					if (!f.className.includes('.'))
+						names.push('kb2abot.' + f.className)
+				else names.push(f.className)
+				reply(
+					`Có ${found.length} lệnh: ${names.join(
 							', '
 						)}\nBạn muốn xài lệnh nào?`
-					)
-				}
+				)
 			}
-		} else {
+		}
+		if (!found) {
+			const allKeywords = []
+			this.plugins.forEach(command => allKeywords.push(...command.keywords))
+			const { ratings } = stringSimilarity.findBestMatch(
+				keyword,
+				allKeywords
+			)
+			ratings.sort((a, b) => a.rating - b.rating)
+			const bestMatches = ratings.slice(-3).map(item => item.target)
 			reply(
-				`Sai cú pháp!\n${thread.storage.prefix}<lệnh> <nội dung truyền vào lệnh>`
+				`Không tìm thấy lệnh: "${keyword}"\nGợi ý lệnh:\n${bestMatches.join(
+							', '
+						)}\nBạn có thể xem danh sách lệnh ở ${thread.prefix}help`
 			)
 		}
 	}
+
+	await thread.save()
+}
+
+export async function a(message) {
 
 	const isCommand = message.body.indexOf(thread.storage.prefix) == 0
 	for (const command of kb2abot.pluginManager.getAllCommands()) {
