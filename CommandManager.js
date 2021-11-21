@@ -1,4 +1,4 @@
-import Manager from "./utils/Manager"
+import Manager from "./util/Manager"
 
 export default class CommandManager extends Manager {
 	constructor(master) {

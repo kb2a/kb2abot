@@ -5,7 +5,7 @@
 // }
 // import getDirname from "es-dirname"
 import NodeCache from "node-cache"
-import translate from "./util/translate"
+import * as Translate from "./util/translate"
 import CommandManager from "./CommandManager"
 
 export default class Command {
@@ -35,8 +35,8 @@ export default class Command {
 			return metadata
 		this.cache.set("metadata", {
 			keywords: [],
-			description: translate("description", locale),
-			usage: translate("usage", locale)
+			description: Translate("description", locale),
+			usage: Translate("usage", locale)
 		})
 	}
 }

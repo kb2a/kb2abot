@@ -5,7 +5,7 @@ import login from "facebook-chat-api"
  * @param  {}
  * @return {[type]}
  */
-export default (credential, config) => {
+export default (credential, apiOptions) => {
 	let unofficialAppState
 	if (isUsingCookie(credential)) {
 		const cookieType = getCookieType(credential.cookie)
@@ -26,10 +26,9 @@ export default (credential, config) => {
 		throw new Error("Login using usr/pwd is deprecated on facebook platform")
 	}
 
-	const { fcaOptions } = config
 	return checkCredential({
 		appState: unofficialAppState
-	}, fcaOptions)
+	}, apiOptions)
 }
 
 export function isUsingCookie(credential) {
@@ -57,9 +56,9 @@ export function getCookieType(text) {
 	}
 }
 
-export function checkCredential(credential, config) {
+export function checkCredential(credential, config = {}) {
 	return new Promise((resolve, reject) => {
-		login(credential, config, (err, api) => {
+		login(credential, (err, api) => {
 			if (err) {
 				return reject(new Error("Wrong/expired cookie!"))
 			}
@@ -70,11 +69,15 @@ export function checkCredential(credential, config) {
 						new Error("Your account has been disabled or blocked features")
 					)
 				}
+				console.log({
+					uid: userID,
+					name: ret[userID].name,
+				})
 				resolve({
 					uid: userID,
 					name: ret[userID].name,
 					appState: api.getAppState(),
-					fca: api
+					api
 				})
 			})
 		})
@@ -97,25 +100,25 @@ export function convertJ2teamToAppstate(j2team) {
 }
 
 export function convertAtpToAppstate(atp) {
-	const unofficialAppState = []
-	const items = atp.split("|")[0].split("")
-	if (items.length < 2) throw "Not a valid atp cookie"
-	const validItems = ["sb", "datr", "c_user", "xs"]
-	let validCount = 0
+	const unofficialAppState = [];
+	const items = atp.split(';|')[0].split(';');
+	if (items.length < 2) throw 'Not a atp cookie';
+	const validItems = ['sb', 'datr', 'c_user', 'xs'];
+	let validCount = 0;
 	for (const item of items) {
-		const key = item.split("=")[0]
-		const value = item.split("=")[1]
-		if (validItems.includes(key)) validCount++
+		const key = item.split('=')[0];
+		const value = item.split('=')[1];
+		if (validItems.includes(key)) validCount++;
 		unofficialAppState.push({
 			key,
 			value,
-			domain: "facebook.com",
-			path: "/"
-		})
+			domain: 'facebook.com',
+			path: '/'
+		});
 	}
 	if (validCount >= validItems.length) {
-		return unofficialAppState
+		return unofficialAppState;
 	} else {
-		throw "Not a valid atp cookie"
+		throw 'Not a atp cookie';
 	}
 }

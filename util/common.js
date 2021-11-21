@@ -7,7 +7,7 @@
  * @module COMMON
  */
 import fs from 'fs'
-import axios from 'axios'
+import fetch from 'node-fetch'
 import minimist from 'minimist'
 
 /**
@@ -327,30 +327,15 @@ export const validURL = str => {
 	return !!pattern.test(str);
 };
 
-export const downloadFile = async (fileUrl, outputLocationPath) => {
-	const writer = fs.createWriteStream(outputLocationPath);
-
-	const response = await axios({
-		method: 'get',
-		url: fileUrl,
-		responseType: 'stream'
-	});
-
+export const downloadFile = (async (url, path) => {
+	const res = await fetch(url);
+	const fileStream = fs.createWriteStream(path);
 	await new Promise((resolve, reject) => {
-		response.data.pipe(writer);
-		let error = null;
-		writer.on('error', err => {
-			error = err;
-			writer.close();
-			reject(err);
-		});
-		writer.on('close', () => {
-			if (!error) {
-				resolve(true);
-			}
-		});
+		res.body.pipe(fileStream);
+		res.body.on("error", reject);
+		fileStream.on("finish", resolve);
 	});
-};
+});
 
 export const convert_to_string_time = (time = 0) => {
 	if (time < 0) time = 0

@@ -32,7 +32,7 @@ export function debug(message, tags = []) {
 	], [].concat([
 		"DEBUG",
 		["white", "bgCyan"]
-	], tags))
+	], tags || this.tags))
 }
 
 export function error(message, tags = []) {
@@ -42,7 +42,7 @@ export function error(message, tags = []) {
 	], [].concat([
 		"ERROR",
 		["white", "bgRed"]
-	], tags))
+	], tags || this.tags))
 }
 
 export function done(message, tags) {
@@ -52,7 +52,7 @@ export function done(message, tags) {
 	], [].concat([
 		"DONE",
 		["white", "bgGreen"]
-	], tags))
+	], tags || this.tags))
 }
 
 export function success(message, tags) {
@@ -62,7 +62,7 @@ export function success(message, tags) {
 	], [].concat([
 		"DONE",
 		["white", "bgGreen"]
-	], tags))
+	], tags || this.tags))
 }
 
 export function warn(message, tags) {
@@ -72,10 +72,10 @@ export function warn(message, tags) {
 	], [].concat([
 		"DONE",
 		["white", "bgYellow"]
-	], tags))
+	], tags || this.tags))
 }
 
-export const setTerminalTitle = text => {
+export function setTerminalTitle(text) {
 	process.stdout.write(
 		`${String.fromCharCode(27)}]0${text}${String.fromCharCode(7)}`
 	)

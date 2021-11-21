@@ -1,5 +1,7 @@
 // this file just for init datastore, no need to instance in every action (insert, find ...)
-import path from "path"
+import { join, isAbsolute } from "path"
+import { fileURLToPath } from 'url';
+import { existsSync } from "fs"
 import nedb from "nedb-promises"
 import pluralize from "pluralize"
 
@@ -34,7 +36,7 @@ export function model(name, schema) {
 	class Model {
 		static async load() {
 			if (loaded) return collection
-			collection = nedb.create(path.join(directory, pluralize(name) + ".db"))
+			collection = nedb.create(join(directory, pluralize(name) + ".db"))
 			await collection.load()
 			loaded = true
 			handleQueue()
@@ -111,10 +113,30 @@ export function model(name, schema) {
 }
 
 export async function init(dir) {
+	if (!isAbsolute(dir))
+		dir = fileURLToPath(join(getCallerFile(), "..", dir))
+	if (!existsSync(dir)) return
 	directory = dir
 	const jobs = []
 	for (const modelName in Models) {
 		jobs.push(Models[modelName].load())
 	}
 	return await Promise.all(jobs)
+}
+
+function getCallerFile() {
+	let originalFunc = Error.prepareStackTrace;
+	let callerfile;
+	try {
+		var err = new Error();
+		var currentfile;
+		Error.prepareStackTrace = function (err, stack) { return stack; };
+		currentfile = err.stack.shift().getFileName();
+		while (err.stack.length) {
+			callerfile = err.stack.shift().getFileName();
+			if (currentfile !== callerfile) break;
+		}
+	} catch {}
+	Error.prepareStackTrace = originalFunc;
+	return callerfile;
 }

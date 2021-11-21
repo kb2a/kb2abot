@@ -1,5 +1,5 @@
 import Joi from "joi"
-import {model} from "../../../datastores"
+import {model} from "../../../datastore.js"
 
 const Thread = model("Thread", Joi.object({
 	id: Joi.string(),
