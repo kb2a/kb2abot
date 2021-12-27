@@ -20,15 +20,20 @@ export default (credential, apiOptions) => {
 			unofficialAppState = JSON.parse(credential.cookie)
 			break
 		case -1:
-			throw new Error("Invalid cookie, please check again (support j2team, atp cookie)")
+			throw new Error(
+				"Invalid cookie, please check again (support j2team, atp cookie)"
+			)
 		}
 	} else {
 		throw new Error("Login using usr/pwd is deprecated on facebook platform")
 	}
 
-	return checkCredential({
-		appState: unofficialAppState
-	}, apiOptions)
+	return checkCredential(
+		{
+			appState: unofficialAppState
+		},
+		apiOptions
+	)
 }
 
 export function isUsingCookie(credential) {
@@ -69,10 +74,6 @@ export function checkCredential(credential, config = {}) {
 						new Error("Your account has been disabled or blocked features")
 					)
 				}
-				console.log({
-					uid: userID,
-					name: ret[userID].name,
-				})
 				resolve({
 					uid: userID,
 					name: ret[userID].name,
@@ -100,25 +101,25 @@ export function convertJ2teamToAppstate(j2team) {
 }
 
 export function convertAtpToAppstate(atp) {
-	const unofficialAppState = [];
-	const items = atp.split(';|')[0].split(';');
-	if (items.length < 2) throw 'Not a atp cookie';
-	const validItems = ['sb', 'datr', 'c_user', 'xs'];
-	let validCount = 0;
+	const unofficialAppState = []
+	const items = atp.split(";|")[0].split(";")
+	if (items.length < 2) throw "Not a atp cookie"
+	const validItems = ["sb", "datr", "c_user", "xs"]
+	let validCount = 0
 	for (const item of items) {
-		const key = item.split('=')[0];
-		const value = item.split('=')[1];
-		if (validItems.includes(key)) validCount++;
+		const key = item.split("=")[0]
+		const value = item.split("=")[1]
+		if (validItems.includes(key)) validCount++
 		unofficialAppState.push({
 			key,
 			value,
-			domain: 'facebook.com',
-			path: '/'
-		});
+			domain: "facebook.com",
+			path: "/"
+		})
 	}
 	if (validCount >= validItems.length) {
-		return unofficialAppState;
+		return unofficialAppState
 	} else {
-		throw 'Not a atp cookie';
+		throw "Not a atp cookie"
 	}
 }

@@ -1,10 +1,15 @@
 export default class Manager extends Array {
-	#store = {}
-	
-	constructor(items = []) {
-		super()
-		for (let i = 0; i < items.length; i++)
-			this.push(items[i])
+	#store = {};
+
+	constructor(length) {
+		if (Number.isInteger(length)) {
+			// because of built-in .map invoke this constructor
+			super(length)
+			this.isManager = false
+		} else {
+			super()
+			this.isManager = true
+		}
 	}
 
 	first() {

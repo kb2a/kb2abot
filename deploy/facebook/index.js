@@ -1,7 +1,8 @@
 import login from "./login"
 import hook from "./hook"
+import {promisify} from "../../util/fca"
 
-//                         _ooOoo_      
+//                         _ooOoo_
 //                        o8888888o
 //                        88" . "88
 //                        (| -_- |)
@@ -21,10 +22,32 @@ import hook from "./hook"
 //         JUST TO MAKE SURE THE CODE RUN SMOOTHLY ;)
 
 export default async (credential, options) => {
-	// const { uid, name, api, appState: officialAppState }
-	const { externalHook } = options
-	const client = await login(credential, options.apiOptions)
-	const hooker = (externalHook || hook).bind(options)
-	client.api.listenMqtt(hooker)
+	const {
+		externalHook,
+		apiOptions = {},
+		pluginConfig = {},
+		plugins = []
+	} = options
+	const client = await login(credential, apiOptions)
+	const hooker = externalHook || hook
+	const promisifyApi = promisify(client.api)
+	for (const plugin of plugins) if (plugin.isInternal) plugin.plugins = plugins
+	client.api.listenMqtt(async (err, message) => {
+		try {
+			const result = await hooker.bind({
+				api: promisifyApi,
+				config: pluginConfig,
+				plugins
+			})(err, message)
+			if (result)
+				await promisifyApi.sendMessage(
+					result,
+					message.threadID,
+					message.messageID
+				)
+		} catch (err) {
+			console.error(err)
+		}
+	})
 	return client
 }
