@@ -11,7 +11,7 @@
     "debug": "node --trace-warnings --inspect-brk src/deploy --cookiePath bot.json",
     "debug-internal": "node --inspect-brk src dev",
     "login": "node login",
-    "jsdoc": "jsdoc -c .jsdoc.json -d docs -r . --verbose"
+    "jsdoc": "jsdoc -c .jsdoc.json -d docs -r . --verbose --readme README.md"
   },
   "repository": {
     "type": "git",
