@@ -10,7 +10,8 @@
     "dev": "node --trace-warnings src/deploy --cookiePath bot.json",
     "debug": "node --trace-warnings --inspect-brk src/deploy --cookiePath bot.json",
     "debug-internal": "node --inspect-brk src dev",
-    "login": "node login"
+    "login": "node login",
+    "jsdoc": "jsdoc -c .jsdoc.json -d docs -r . --verbose"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
     "@babel/core": "^7.16.0",
     "@babel/eslint-parser": "^7.16.3",
     "@babel/plugin-syntax-top-level-await": "^7.14.5",
+    "clean-jsdoc-theme": "^3.3.1",
     "decache": "^4.6.0",
     "deep-extend": "^0.6.0",
     "detective-esm": "https://github.com/browserify/detective-esm",
@@ -30,6 +32,7 @@
     "facebook-chat-api": "https://github.com/kb2ateam/facebook-chat-api",
     "fast-safe-stringify": "^2.0.7",
     "joi": "^17.4.2",
+    "jsdoc-fresh": "^1.1.1",
     "minimist": "^1.2.5",
     "nedb-promises": "^5.0.2",
     "node-cache": "^5.1.2",

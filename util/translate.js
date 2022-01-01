@@ -1,5 +1,22 @@
+/**
+ * Chứa các function dịch thuật<br>
+ * Hướng dẫn sử dụng:<br>
+ * import {<tên hàm 1>, <tên hàm 2>} from "kb2abot/util/translate.js"<br>
+ * Ví dụ:
+ * <code>import {bing, google, detect} from "kb2abot/util/translate.js"</code>
+ * @module Util.Translate
+ */
 import fetch from "node-fetch"
 
+/**
+ * Translate a text from <from> to <to> using Bing engine
+ * @async
+ * @method bing
+ * @param  {string} text  Text to be translated
+ * @param  {string} from  Source language
+ * @param  {string} to    Destination language
+ * @return {string} Translated text
+ */
 export async function bing(text, from, to) {
 	const body = await (
 		await fetch(
@@ -9,6 +26,15 @@ export async function bing(text, from, to) {
 	return body.slice(1, body.length - 1)
 }
 
+/**
+ * Translate a text from <from> to <to> using Google engine
+ * @async
+ * @method bing
+ * @param  {string} text  Text to be translated
+ * @param  {string} [from="auto"]  Source language
+ * @param  {string} to    Destination language
+ * @return {string} Translated text
+ */
 export async function google(text, from = "auto", to) {
 	const json = await (
 		await fetch(
@@ -18,6 +44,13 @@ export async function google(text, from = "auto", to) {
 	return json[0][0][0]
 }
 
+/**
+ * Detect language that the text are using
+ * @async
+ * @method detect
+ * @param  {string} text  Source text
+ * @return {string} language
+ */
 export async function detect(text) {
 	const body = await (
 		await fetch(

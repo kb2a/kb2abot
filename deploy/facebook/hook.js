@@ -3,10 +3,19 @@ import stringSimilarity from "string-similarity"
 import Thread from "./models/Thread"
 
 export default async function hook(err, message) {
-	const {config, api} = this
+	const {config, api, pluginManager} = this
 	if (err) return console.error(err)
 	if (!message) return
 
+	/**
+	 * Reply to a thread & messageID (this is facebook form, for now)
+	 * @name reply
+	 * @function
+	 * @param  {string} text                           The message you want to send
+	 * @param  {string|number} [threadID=message.threadID]    threadID
+	 * @param  {string} [messageID=message.messageID]  messageID you want to reply
+	 * @return {Promise} If error, return error
+	 */
 	const reply = async (
 		text,
 		threadID = message.threadID,
@@ -69,7 +78,7 @@ export default async function hook(err, message) {
 			// is using command ==>
 			const keyword = message.body.split(" ")[0].slice(thread.prefix.length) // lấy keyword của message
 			const address = keyword.split(".")
-			const commands = this.plugins
+			const commands = pluginManager
 				.map(plugin => plugin.commands.recursiveFind(address))
 				.flat()
 			if (commands.length == 1) {
@@ -89,7 +98,7 @@ export default async function hook(err, message) {
 				}help <lệnh> để xem chi tiết)`
 			if (commands.length == 0) {
 				const allKeywords = []
-				for (const plugin of this.plugins)
+				for (const plugin of pluginManager)
 					plugin.commands.forEach(command =>
 						allKeywords.push(...command.keywords)
 					)

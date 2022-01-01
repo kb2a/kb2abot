@@ -1,11 +1,12 @@
 /**
  * Chứa các function thông thường được sử dụng nhiều<br>
  * Hướng dẫn sử dụng:<br>
- * import {<tên hàm 1>, <tên hàm 2>} from "./common.util.js"<br>
+ * import {<tên hàm 1>, <tên hàm 2>} from "kb2abot/util/common.js"<br>
  * Ví dụ:
- * <code>import {asyncWait, round, extend} from "./common.util.js"</code>
- * @module COMMON
+ * <code>import {asyncWait, round, extend} from "kb2abot/util/common.js"</code>
+ * @module Util.Common
  */
+
 import fs from "fs"
 import fetch from "node-fetch"
 import minimist from "minimist"
@@ -20,11 +21,11 @@ import minimist from "minimist"
  *  console.log("Ban co the gui lai duoc roi!");
  * });
  */
-export const asyncWait = async time => {
+export async function asyncWait(milis) {
 	return new Promise(resolve => {
 		setTimeout(() => {
 			resolve()
-		}, time)
+		}, milis)
 	})
 }
 /**
@@ -39,7 +40,7 @@ export const asyncWait = async time => {
  * console.log(constrain(-1, 1, 10);
  * // 1
  */
-export const constrain = (value, left, right) => {
+export function constrain(value, left, right) {
 	return value >= left ? (value <= right ? value : right) : left
 }
 /**
@@ -57,7 +58,7 @@ export const constrain = (value, left, right) => {
  * round(Math.PI, 2)
  * // 3.14
  */
-export const round = (number, amount) => {
+export function round(number, amount) {
 	return parseFloat(Number(number).toFixed(amount))
 }
 /**
@@ -80,7 +81,7 @@ export const round = (number, amount) => {
  * // { a: { b: "kb2abot", c: true } }
  * }
  */
-export const extend = (obj, deep) => {
+export function extend(obj, deep) {
 	let argsStart, deepClone
 
 	if (typeof deep === "boolean") {
@@ -120,7 +121,7 @@ export const extend = (obj, deep) => {
  * @example
  * //Xem ở đây: {@link https://www.npmjs.com/package/minimist} (nhớ CTRL + CLICK)
  */
-export const parseArgs = (str, specialChar) => {
+export function parseArgs(str, specialChar) {
 	const quotes = ["\"", "'", "`"]
 	for (let quote of quotes) {
 		let tmp = str.split(quote)
@@ -150,7 +151,7 @@ export const parseArgs = (str, specialChar) => {
  * parseValue(args, ["s"]);
  * // TRUE
  */
-export const parseValue = (args, validList) => {
+export function parseValue(args, validList) {
 	for (const param in args) {
 		if (validList.indexOf(param) != -1) {
 			const value = args[param]
@@ -166,7 +167,7 @@ export const parseValue = (args, validList) => {
  * deleteFile(__dirname + "/test.txt");
  * // *File test.txt sẽ bị xóa*
  */
-const deleteFile = path => {
+export function deleteFile(path) {
 	return new Promise((resolve, reject) => {
 		try {
 			fs.unlinkSync(path)
@@ -186,7 +187,7 @@ const deleteFile = path => {
  * getKeyword("/ytmp3 -s 'Anh yeu em'")
  * // "ytmp3"
  */
-export const getKeyword = text => {
+export function getKeyword(text) {
 	return text
 		.split(" ")
 		.slice(0, 1)[0]
@@ -201,7 +202,7 @@ export const getKeyword = text => {
  * getFileSize(__dirname + "/test.txt");
  * // 1
  */
-export const getFileSize = path => {
+export function getFileSize(path) {
 	let fileSizeInBytes = fs.statSync(path)["size"]
 	//Convert the file size to megabytes (optional)
 	let fileSizeInMegabytes = fileSizeInBytes / 1000000.0
@@ -215,7 +216,7 @@ export const getFileSize = path => {
  * subname("test.txt");
  * // "test"
  */
-export const subname = text => {
+export function subname(text) {
 	return text
 		.split(".")
 		.slice(0, -1)
@@ -231,7 +232,7 @@ export const subname = text => {
  * numbersToWords(18102004);
  * // "ogoztzzf"
  */
-export const numberToPassword = number => {
+export function numberToPassword(number) {
 	const numbers = ["z", "o", "t", "h", "f", "i", "s", "e", "g", "n"]
 	let str = number.toString()
 	for (let i = 0; i < 10; i++) {
@@ -247,7 +248,7 @@ export const numberToPassword = number => {
  * currencyFormat(1234567);
  * // "1,234,567"
  */
-export const currencyFormat = number => {
+export function currencyFormat(number) {
 	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
 /**
@@ -258,7 +259,7 @@ export const currencyFormat = number => {
  * getParam("/help hello, good morning!");
  * // "hello, good morning!"
  */
-export const getParam = text => {
+export function getParam(text) {
 	return text
 		.split(" ")
 		.slice(1)
@@ -269,7 +270,7 @@ export const getParam = text => {
  * @param  {String} text Văn bản nào đó
  * @return {String}      Văn bản sạch
  */
-export const removeSpecialChar = str => {
+export function removeSpecialChar(str) {
 	if (str === null || str === "") return false
 	else str = str.toString()
 
@@ -293,11 +294,11 @@ export const removeSpecialChar = str => {
  * // trả về giá trị ngẫu nhiên từ 1 đến 10 và được làm chòn đến chữ số thập phân thứ hai
  *
  */
-export const random = (start, end) => {
+export function random(start, end) {
 	return Math.floor(Math.random() * (end - start + 1) + start)
 }
 
-export const shuffle = arr => {
+export function shuffle(arr) {
 	// thuật toán bogo-sort
 	let count = arr.length,
 		temp,
@@ -314,7 +315,7 @@ export const shuffle = arr => {
 	return arr //Bogosort with no điều kiện dừng
 }
 
-export const validURL = str => {
+export function validURL(str) {
 	var pattern = new RegExp(
 		"^(https?:\\/\\/)?" + // protocol
 		"((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
@@ -327,7 +328,7 @@ export const validURL = str => {
 	return !!pattern.test(str)
 }
 
-export const downloadFile = async (url, path) => {
+export async function downloadFile(url, path) {
 	const res = await fetch(url)
 	const fileStream = fs.createWriteStream(path)
 	await new Promise((resolve, reject) => {
@@ -337,7 +338,7 @@ export const downloadFile = async (url, path) => {
 	})
 }
 
-export const convert_to_string_time = (time = 0) => {
+export function convert_to_string_time(time = 0) {
 	if (time < 0) time = 0
 	const hh = Math.floor(time / 1000 / 60 / 60)
 	const mm = Math.floor((time - hh * 60 * 60 * 1000) / 1000 / 60)
@@ -348,13 +349,14 @@ export const convert_to_string_time = (time = 0) => {
 	return text
 }
 
-export const deepEqual = (x, y) => {
+export function deepEqual(x, y) {
 	if (x === y) {
 		return true
 	} else if (
 		typeof x == "object" &&
 		x != null &&
-		typeof y == "object" && y != null
+		typeof y == "object" &&
+		y != null
 	) {
 		if (Object.keys(x).length != Object.keys(y).length) return false
 

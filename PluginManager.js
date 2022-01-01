@@ -6,18 +6,31 @@ import getCallerFile from "get-caller-file"
 import deepExtend from "deep-extend"
 import YAML from "yaml"
 
-export default class PluginManager extends Manager {
-	constructor(configDir, userdataDir) {
+/** Class representing a PluginManager - A Manager for plugins */
+class PluginManager extends Manager {
+	/**
+	 * Constructor with init directories
+	 * @param  {string}    configDir    The config directory* (*: if use relative path, it won't use process.cwd() to join, it use your current __dirname or import.meta.url)
+	 * @param  {string}    userdataDir  The userdata directory*
+	 */
+	constructor(configDir, userdataDir, options = {}) {
 		super(configDir)
+		/** Make sure this class is not created by js built-in function like .map, .filter, ...  */
 		if (!this.isManager) return
 		this.configDir = fileURLToPath(join(getCallerFile(), "..", configDir))
 		this.userdataDir = fileURLToPath(join(getCallerFile(), "..", userdataDir))
+		this.options = options
 		if (!existsSync(this.configDir) || !existsSync(this.userdataDir)) {
 			console.log(this.configDir, this.userdataDir)
 			throw new Error("Config or userdata directory is not exists!")
 		}
 	}
 
+	/**
+	 * Get plugin's configuration search in this.configDir
+	 * @param  {Plugin}  plugin  Instance of class Plugin
+	 * @return {object}  The plugin's config
+	 */
 	getConfig(plugin) {
 		const file = `${plugin.package.name}@${plugin.package.author}.config.yaml`
 		const configPath = join(this.configDir, file)
@@ -28,6 +41,11 @@ export default class PluginManager extends Manager {
 		return YAML.parse(readFileSync(configPath).toString()) || {}
 	}
 
+	/**
+	 * Get plugin's userdata search in this.userdataDir, userdata is more like datastore for plugin
+	 * @param  {Plugin}    plugin  [description]
+	 * @return {object}    Userdata
+	 */
 	getUserdata(plugin) {
 		const file = `${plugin.package.name}@${plugin.package.author}.userdata.yaml`
 		const userdataPath = join(this.userdataDir, file)
@@ -38,6 +56,12 @@ export default class PluginManager extends Manager {
 		return YAML.parse(readFileSync(userdataPath).toString()) || {}
 	}
 
+	/**
+	 * Add plugin(s) to this Manager
+	 * @async
+	 * @param  {Plugin} plugins  One or more plugins you want to add
+	 * @return {Promise}
+	 */
 	async add(...plugins) {
 		if (Array.isArray(plugins[0])) plugins = plugins[0]
 		await Promise.all(
@@ -62,3 +86,5 @@ export default class PluginManager extends Manager {
 		this.push(...plugins)
 	}
 }
+
+export default PluginManager

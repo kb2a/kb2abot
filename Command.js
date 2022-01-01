@@ -1,11 +1,25 @@
 import NodeCache from "node-cache"
 import Manager from "./util/Manager"
 
-export default class Command extends Manager {
+/**
+ * Command options to use to pass through Command constructor
+ * @typedef {object} CommandOptions
+ * @property {Plugin} plugin Plugin instance
+ * @property {string} [parentCmd=undefined] Internal variable to use to create recursive commands inside commands so you don't need to pass this
+ * @property {boolean} [isPrimary=false] To distinguish, primary commands hold non-primary commands so each plugin should have only 1 primary command
+ */
+
+/** Class representing a Command */
+class Command extends Manager {
+	/**
+	 * Create a Command
+	 * @param  {CommandOptions}	[options={}]	The options to create Command
+	 */
 	constructor(options = {}) {
 		super(options)
+		/** Make sure this class is not created by js built-in function like .map, .filter, ...  */
 		if (!this.isManager) return
-		const {plugin, parentCmd, isPrimary} = options
+		const {plugin, parentCmd, isPrimary = false} = options
 		this.plugin = plugin
 		this.parentCmd = parentCmd
 		this.cache = new NodeCache({
@@ -14,6 +28,10 @@ export default class Command extends Manager {
 		this.isPrimary = isPrimary
 	}
 
+	/**
+	 * Get the address array of this command
+	 * @type {Array<string>}
+	 */
 	get address() {
 		const addr = []
 		let node = this
@@ -24,6 +42,11 @@ export default class Command extends Manager {
 		return addr
 	}
 
+	/**
+	 * Recursively get the sum length of all child commands in this command
+	 * @readonly
+	 * @type {number}
+	 */
 	get childLength() {
 		let count = 0
 		this.forEach(() => {
@@ -32,6 +55,12 @@ export default class Command extends Manager {
 		return count
 	}
 
+	/**
+	 * Recursively find all child commands
+	 * @param  {Array}       [address=[]]  The command address
+	 * @param  {number}      [index=0]     Internal variable to use to do recursive stuff, don't need to understand
+	 * @return {Command[]}      Array of commands found
+	 */
 	recursiveFind(address = [], index = 0) {
 		if (this.length == 0 || address.length == 0) return []
 		const node = address[index]
@@ -50,6 +79,10 @@ export default class Command extends Manager {
 		return founds
 	}
 
+	/**
+	 * Provide .forEach js built-in function like (with recursive)
+	 * @param  {function} callbackFn  Callback function with params(item, index, thisArray)
+	 */
 	forEach(callbackFn) {
 		for (let i = 0; i < this.length; i++) {
 			callbackFn(this[i], i, this)
@@ -57,6 +90,12 @@ export default class Command extends Manager {
 		}
 	}
 
+	/**
+	 * Add child commands to this command
+	 * @async
+	 * @param  {...Command} commands  One or more commands
+	 * @return {Promise} Promise no return
+	 */
 	async add(...commands) {
 		await Promise.all(
 			commands.map(command => {
@@ -74,9 +113,24 @@ export default class Command extends Manager {
 		this.push(...commands)
 	}
 
-	// Called after this command is inited (like an async constructor)
+	/**
+	 * Called after this command is constructored, you would wrap your "async this.add(command)" in this function in order to load commands in synchronous
+	 * @async
+	 * @return {Promise}
+	 */
 	async load() {}
 
-	// overide
-	onCall(sender, args, sendMessage) {}
+	/**
+	 * Called when user hits command
+	 * @async
+	 * @abstract
+	 * @param  {Thread} thread   Instance of Thread class
+	 * @param  {Object} message 	 Message object, each messenger platform may be different
+	 * @param  {function} reply    Pass "reply" function from "./deploy/facebook/hook.js"
+	 * @param  {api} api      The API of messenger-platform you used
+	 * @return {string} Message you want to reply, you can use the "reply" function to reply but return will do it faster and support most of messenger-platforms
+	 */
+	onCall(thread, message, reply, api) {}
 }
+
+export default Command

@@ -1,4 +1,8 @@
-export default class Manager extends Array {
+/**
+ * class Manager to store items like Array but more convenient
+ * @extends Array
+ */
+class Manager extends Array {
 	#store = {};
 
 	constructor(length) {
@@ -12,23 +16,43 @@ export default class Manager extends Array {
 		}
 	}
 
+	/**
+	 * Get first item of manager
+	 * @return {object} First item
+	 */
 	first() {
 		return this[0]
 	}
 
+	/**
+	 * Get last item of manager
+	 * @return {object} Last item
+	 */
 	last() {
 		return this[this.length - 1]
 	}
 
+	/**
+	 * Remove all items in manager
+	 */
 	clear() {
 		this.splice(0, this.length)
 		this.#store = {}
 	}
 
+	/**
+	 * Get item by its ID
+	 * @param  {string} id  ID of item
+	 * @return {object} item
+	 */
 	get(id) {
 		return this.#store[id]
 	}
 
+	/**
+	 * Add an item to manager unique by ID
+	 * @param  {...object} items  Item(s)
+	 */
 	push(...items) {
 		for (let i = 0; i < items.length; i++) {
 			const item = items[i]
@@ -45,6 +69,10 @@ export default class Manager extends Array {
 		}
 	}
 
+	/**
+	 * Remove an item in manager
+	 * @param  {string} id  Item's ID
+	 */
 	remove(id) {
 		const itemIndex = this.findIndex(item => item.id == id)
 		if (itemIndex != -1) {
@@ -53,3 +81,5 @@ export default class Manager extends Array {
 		}
 	}
 }
+
+export default Manager

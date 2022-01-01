@@ -1,3 +1,11 @@
+/**
+ * Chứa các function hỗ trợ facebook chat api<br>
+ * Hướng dẫn sử dụng:<br>
+ * import {<tên hàm 1>, <tên hàm 2>} from "kb2abot/util/fca.js"<br>
+ * Ví dụ:
+ * <code>import {getUsername, promisify} from "kb2abot/util/fca.js"</code>
+ * @module Util.Fca
+ */
 import fetch from "node-fetch"
 
 export const callbackKeys = [
@@ -38,9 +46,16 @@ export const normalKeys = [
 	"getAppState",
 	"getCurrentUserID",
 	"getEmojiUrl",
-	"setOptions"
+	"setOptions",
+	"listenMqtt"
 ]
 
+/**
+ * Get username by facebook user link
+ * @method getUsername
+ * @param  {string}    fblink  Facebook user link
+ * @return {string}    username
+ */
 export function getUsername(fblink) {
 	try {
 		return /id=(.*?)$/.exec(fblink)[1]
@@ -53,26 +68,12 @@ export function getUsername(fblink) {
 	}
 }
 
-export async function getToken() {
-	let stringifyCookie = ""
-	const appstate = api.getAppState()
-	for (const e of appstate) {
-		stringifyCookie += e.toString().split(";")[0] + ";"
-	}
-	const data = await (
-		await fetch("https://business.facebook.com/business_locations", {
-			headers: {
-				"User-Agent":
-					"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/600.3.18 (KHTML, like Gecko) Version/8.0.3 Safari/600.3.18",
-				cookie: stringifyCookie
-			}
-		})
-	).text()
-	const first = /LMBootstrapper(.*?){"__m":"LMBootstrapper"}/.exec(data)[1]
-	const second = /"],\["(.*?)","/.exec(first)[1]
-	return second
-}
-
+/**
+ * Create a promise-wrapped api functions
+ * @method promisify
+ * @param  {fca}  fca  The facebook chat api instance
+ * @return {object}  FCA support promise
+ */
 export function promisify(fca) {
 	const functions = {}
 	for (const method of callbackKeys) {
@@ -97,6 +98,25 @@ export function promisify(fca) {
 				messageID
 			)
 		})
+	}
+	functions.getToken = async () => {
+		let stringifyCookie = ""
+		const appstate = fca.getAppState()
+		for (const e of appstate) {
+			stringifyCookie += e.toString().split(";")[0] + ";"
+		}
+		const data = await (
+			await fetch("https://business.facebook.com/business_locations", {
+				headers: {
+					"User-Agent":
+						"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/600.3.18 (KHTML, like Gecko) Version/8.0.3 Safari/600.3.18",
+					cookie: stringifyCookie
+				}
+			})
+		).text()
+		const first = /LMBootstrapper(.*?){"__m":"LMBootstrapper"}/.exec(data)[1]
+		const second = /"],\["(.*?)","/.exec(first)[1]
+		return second
 	}
 	return functions
 }

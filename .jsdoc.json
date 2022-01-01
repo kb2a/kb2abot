@@ -1,0 +1,11 @@
+{
+    "plugins": ["plugins/markdown"],
+    "source":
+    {
+        "excludePattern": "(node_modules|docs|.git|.github|scripts)"
+    },
+    "opts":
+    {
+        "template": "node_modules/clean-jsdoc-theme"
+    }
+}

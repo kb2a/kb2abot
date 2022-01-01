@@ -1,3 +1,7 @@
+/**
+ * @module Datastore
+ */
+
 // this file just for init datastore, no need to instance in every action (insert, find ...)
 import {existsSync} from "fs"
 import {fileURLToPath} from "url"
@@ -10,6 +14,12 @@ import getCallerFile from "get-caller-file"
 let directory = null
 const Models = {}
 
+/**
+ * Function create subclasses of Model. A Model is a class that's your primary tool for interacting with NeDB. An instance of a Model is called a Document.
+ * @param  {string} name   Name of model (in singular form)
+ * @param  {Joi_Schema} schema Joi schema
+ * @return {Model}        Class Model
+ */
 export function model(name, schema) {
 	if (!/^[A-Za-z0-9]+$/.test(name))
 		throw new Error(`${name} is not a valid model name (A-Z, a-z, 0-9 only)`)

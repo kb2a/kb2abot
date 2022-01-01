@@ -1,6 +1,5 @@
 import login from "./login"
 import hook from "./hook"
-import {promisify} from "../../util/fca"
 
 //                         _ooOoo_
 //                        o8888888o
@@ -21,26 +20,33 @@ import {promisify} from "../../util/fca"
 // ===========`-.`___`-.__\ \___  /__.-'_.'_.-'================
 //         JUST TO MAKE SURE THE CODE RUN SMOOTHLY ;)
 
+/**
+ * Bootstrap login (add hook -> listener, create api, catch error, ...)
+ * @namespace facebook
+ * @method facebook
+ * @param  {credential} credential  See type definition in "./login.js"
+ * @param  {apiOptions} options     See type definition in "./login.js"
+ * @return {Promise} result from import("./login.js").default(credential, apiOptions)
+ */
 export default async (credential, options) => {
 	const {
 		externalHook,
 		apiOptions = {},
-		pluginConfig = {},
-		plugins = []
+		pluginOptions = {},
+		pluginManager = []
 	} = options
 	const client = await login(credential, apiOptions)
 	const hooker = externalHook || hook
-	const promisifyApi = promisify(client.api)
-	for (const plugin of plugins) if (plugin.isInternal) plugin.plugins = plugins
+	for (const plugin of pluginManager) if (plugin.isInternal) plugin.pluginManager = pluginManager
 	client.api.listenMqtt(async (err, message) => {
 		try {
 			const result = await hooker.bind({
-				api: promisifyApi,
-				config: pluginConfig,
-				plugins
+				api: client.api,
+				config: pluginOptions,
+				pluginManager
 			})(err, message)
 			if (result)
-				await promisifyApi.sendMessage(
+				await client.api.sendMessage(
 					result,
 					message.threadID,
 					message.messageID
