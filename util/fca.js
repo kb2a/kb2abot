@@ -55,17 +55,18 @@ export const normalKeys = [
  * @method getUsername
  * @param  {string}    fblink  Facebook user link
  * @return {string}    username
+ * @example
+ * getUsername("https://www.facebook.com/khoakomlem") // => "khoakomlem"
  */
 export function getUsername(fblink) {
-	try {
-		return /id=(.*?)$/.exec(fblink)[1]
-	} catch {
-		try {
-			return /.com\/(.*?)$/.exec(fblink)[1]
-		} catch {
-			return "Unknown"
-		}
-	}
+	let temp = ""
+	if (fblink.includes("?id="))
+		temp = /id=(.*?)$/.exec(fblink)[1]
+	else
+		temp = /.com\/(.*?)$/.exec(fblink)[1]
+	if (temp.includes("/"))
+		return temp.slice(0, temp.indexOf("/"))
+	return temp
 }
 
 /**

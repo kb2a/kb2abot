@@ -16,6 +16,8 @@ import fetch from "node-fetch"
  * @param  {string} from  Source language
  * @param  {string} to    Destination language
  * @return {string} Translated text
+ * @example
+ * await bing("xin chào kẻ mạo danh", "vi", "en") // => "hello impostor"
  */
 export async function bing(text, from, to) {
 	const body = await (
@@ -34,6 +36,8 @@ export async function bing(text, from, to) {
  * @param  {string} [from="auto"]  Source language
  * @param  {string} to    Destination language
  * @return {string} Translated text
+ * @example
+ * await google("giữa chúng ta", null, "en") // => "among us"
  */
 export async function google(text, from = "auto", to) {
 	const json = await (
@@ -50,6 +54,8 @@ export async function google(text, from = "auto", to) {
  * @method detect
  * @param  {string} text  Source text
  * @return {string} language
+ * @example
+ * await detect("Hello") // => "vi"
  */
 export async function detect(text) {
 	const body = await (

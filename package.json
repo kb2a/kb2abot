@@ -1,16 +1,11 @@
 {
   "name": "kb2abot",
   "type": "module",
-  "version": "2.0.3",
-  "description": "Bot that connected to Facebook Messenger help you to manage members, entertain in any groups!",
+  "version": "3.0.0b",
+  "description": "kb2abot is a powerful Node.js module that allows you to easily interact with the Facebook Chat API and more!",
   "main": "index.js",
   "scripts": {
-    "start": "node src",
-    "update": "node scripts/update",
-    "dev": "node --trace-warnings src/deploy --cookiePath bot.json",
-    "debug": "node --trace-warnings --inspect-brk src/deploy --cookiePath bot.json",
-    "debug-internal": "node --inspect-brk src dev",
-    "login": "node login",
+    "start": "node index",
     "jsdoc": "jsdoc -c .jsdoc.json -d docs -r . --verbose --readme README.md"
   },
   "repository": {
@@ -24,27 +19,16 @@
     "@babel/eslint-parser": "^7.16.3",
     "@babel/plugin-syntax-top-level-await": "^7.14.5",
     "clean-jsdoc-theme": "^3.3.1",
-    "decache": "^4.6.0",
-    "deep-extend": "^0.6.0",
-    "detective-esm": "https://github.com/browserify/detective-esm",
     "dotenv": "^10.0.0",
-    "es-dirname": "^0.1.0",
     "facebook-chat-api": "https://github.com/kb2ateam/facebook-chat-api",
-    "fast-safe-stringify": "^2.0.7",
     "joi": "^17.4.2",
-    "jsdoc-fresh": "^1.1.1",
-    "minimist": "^1.2.5",
     "nedb-promises": "^5.0.2",
     "node-cache": "^5.1.2",
-    "node-emoji": "^1.10.0",
     "node-fetch": "^3.1.0",
-    "ora": "^5.3.0",
     "pluralize": "^8.0.0",
-    "recursive-readdir": "^2.2.2",
-    "semver": "^7.3.4",
-    "simple-git": "^2.34.2",
     "string-similarity": "^4.0.4",
-    "uniqid": "^5.2.0"
+    "uniqid": "^5.2.0",
+    "yaml": "^1.10.2"
   },
   "devDependencies": {
     "eslint": "^7.26.0"

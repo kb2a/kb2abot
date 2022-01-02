@@ -7,7 +7,7 @@
  * @property {string} email Facebook account's password (deprecated)
  */
 
-import login from "facebook-chat-api"
+import FCALogin from "facebook-chat-api"
 import {promisify} from "../../util/fca.js"
 
 /**
@@ -84,7 +84,7 @@ export function getCookieType(cookieText) {
  */
 export function checkCredential(credential, apiOptions = {}) {
 	return new Promise((resolve, reject) => {
-		login(credential, (err, api) => {
+		FCALogin(credential, (err, api) => {
 			if (err) {
 				return reject(new Error("Wrong/expired cookie!"))
 			}

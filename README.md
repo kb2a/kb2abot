@@ -1,10 +1,10 @@
 <h1 align="center">
-	<a href="#"><img src="https://i.imgur.com/u6eJA84.png" alt="susbot"></a>
+	<a href="#"><img src="https://i.imgur.com/u6eJA84.png" alt="kb2abot"></a>
 </h1>
 <p align="center">
-	<img alt="size" src="https://img.shields.io/github/repo-size/susbot/susbot.svg?style=flat-square&label=size">
+	<img alt="size" src="https://img.shields.io/github/repo-size/kb2ateam/kb2abot-core.svg?style=flat-square&label=size">
 	<img alt="code-version" src="https://img.shields.io/badge/dynamic/json?color=red&label=code%20version&prefix=v&query=%24.version&url=https://raw.githubusercontent.com/kb2ateam/kb2abot/main/package.json&style=flat-square">
-	<a href="https://github.com/susbot/susbot/commits"><img alt="commits" src="https://img.shields.io/github/commit-activity/m/susbot/susbot.svg?label=commit&style=flat-square"></a>
+	<a href="https://github.com/kb2ateam/kb2abot/commits"><img alt="commits" src="https://img.shields.io/github/commit-activity/m/kb2ateam/kb2abot.svg?label=commit&style=flat-square"></a>
 	<a href="https://www.codefactor.io/repository/github/kb2ateam/kb2abot"><img src="https://www.codefactor.io/repository/github/kb2ateam/kb2abot/badge" alt="CodeFactor" /></a>
 </p>
 
@@ -95,10 +95,11 @@ await pluginManager.add(myPlugin)
 ```
 Finally, now we going to add  **pluginManager** to hook function:
 ```js
-import {Deploy} from "kb2abot"
-const botOptions = JSON.parse(fs.readFileSync("./bots/bot.js"))
+import {Deploy, Datastore} from "kb2abot"
+Datastore.init("./datastores") // If you dont init datastore, your bot will be freeze and throw timeout error
+const botOptions = (await import("./bot.js")).default
 ```
-This is options of your bot (see example template at [example-bot.js](https://github.com/kb2ateam/kb2abot-bootloader/bots/example-bot.js))
+**botOptions** is the options of your bot (see the example template at [example-bot.js](https://github.com/kb2ateam/kb2abot-bootloader/bots/example-bot.js))
 ```js
 const client = await Deploy.facebook(botOptions.credential, {
 	apiOptions: botOptions.fcaOptions,

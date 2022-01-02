@@ -1,25 +1,20 @@
 /**
- * Chứa các function thông thường được sử dụng nhiều<br>
- * Hướng dẫn sử dụng:<br>
- * import {<tên hàm 1>, <tên hàm 2>} from "kb2abot/util/common.js"<br>
- * Ví dụ:
- * <code>import {asyncWait, round, extend} from "kb2abot/util/common.js"</code>
- * @module Util.Common
+ * Common ultility functions<br>
+ * @module Common
  */
 
 import fs from "fs"
 import fetch from "node-fetch"
-import minimist from "minimist"
 
 /**
- * Hàm dừng chương trình async
+ * 
+ * Pause the program with promise wrapped
  * @async
- * @param  {Number} time Thời gian bạn muốn dừng (milisecond)
+ * @param  {Number} time Time to pause (milis)
  * @example
- * console.log("Loi! Vui long gui lai sau 5 giay")
- * asyncWait(5000).then(() => {
- *  console.log("Ban co the gui lai duoc roi!");
- * });
+ * console.log("We will log "amogus" after 5s")
+ * await asyncWait(5000)
+ * console.log("amogus")
  */
 export async function asyncWait(milis) {
 	return new Promise(resolve => {
@@ -28,44 +23,38 @@ export async function asyncWait(milis) {
 		}, milis)
 	})
 }
+
 /**
- * Ràng buộc 1 giá trị trong khoảng từ [left; right]
- * @param  {Number} value Giá trị vào
- * @param  {Number} left  ràng buộc trái
- * @param  {Number} right ràng buộc phải
- * @return {Number} Giá trị trong khoảng [left; right]
+ * Constrain a value in [left; right]
+ * @param  {Number} value The value
+ * @param  {Number} left  Smallest value
+ * @param  {Number} right Biggest value
+ * @return {Number} New value in [left; right]
  * @example
- * console.log(constrain(5, 1, 10);
- * // 5
- * console.log(constrain(-1, 1, 10);
- * // 1
+ * constrain(5, 1, 10) // => 5
+ * constrain(-1, 1, 10) // => -1
  */
 export function constrain(value, left, right) {
 	return value >= left ? (value <= right ? value : right) : left
 }
+
 /**
- * Làm tròn đến chữ số thập phân x
- * @param  {Number} number Số bạn muốn làm tròn
- * @param  {Number} amount Số lượng chữ số thập phân (x)
- * @return {Number}        Số được làm tròn chữ số thập phân x
+ * Round the digit to a certain decimal place
+ * @param  {Number} number The digit
+ * @param  {Number} amount Decimal place
+ * @return {Number}        Rounded digit
  * @example
- * round(Math.PI, 2);
- * // 3.14
- *
- * @example với cách dùng thứ hai này, code sẽ được đẹp hơn
- * import { round } from "./common.util.js"
- *
- * round(Math.PI, 2)
- * // 3.14
+ * round(Math.PI, 2); // => 3.14
  */
 export function round(number, amount) {
 	return parseFloat(Number(number).toFixed(amount))
 }
+
 /**
- * Kế thừa các thuộc tính của 1 object sâu (khác với Object.assign)
- * @param  {Object} object Object kế thừa
- * @param  {Object} deep Object bị kế thừa
- * @return {Object}        Object đã kế thừa
+ * Deep extend
+ * @param  {Object} object Parent object
+ * @param  {Object} deep Inherit object
+ * @return {Object}        Inherited object
  * @example
  * const obj1 = {
  *  a: {
@@ -79,7 +68,6 @@ export function round(number, amount) {
  * }
  * extend(a, b);
  * // { a: { b: "kb2abot", c: true } }
- * }
  */
 export function extend(obj, deep) {
 	let argsStart, deepClone
@@ -113,94 +101,14 @@ export function extend(obj, deep) {
 
 	return obj
 }
+
 /**
- * Dịch 1 đoạn văn bản thành các arguments (xài minimist để dịch)
- * @param  {String} text         Đoạn văn bản nào đó
- * @param  {String} [specialChar=א] Kí tự đặc biệt để xử lí quote
- * @return {Object}             Arguments
+ * Calculate the size of the file (in MB)
+ * @param  {String} path The path to the file
+ * @return {Number}      File size (MB)
  * @example
- * //Xem ở đây: {@link https://www.npmjs.com/package/minimist} (nhớ CTRL + CLICK)
- */
-export function parseArgs(str, specialChar) {
-	const quotes = ["\"", "'", "`"]
-	for (let quote of quotes) {
-		let tmp = str.split(quote)
-		for (let i = 1; i < tmp.length; i += 2) {
-			str = str.replace(
-				`${quote}${tmp[i]}`,
-				`${tmp[i].replace(/ /g, specialChar)}`
-			)
-			str = str.replace(quote, "")
-		}
-	}
-	const output = []
-	str.split(" ").forEach(word => {
-		output.push(word.replace(new RegExp(specialChar, "g"), " "))
-	})
-	return minimist(output)
-}
-/**
- * Lấy giá trị trong minimist arguments (Dùng chung với hàm parseArg)
- * @param  {Object} args           Args của minimist
- * @param  {Array} validList       Các trường mà bạn cần lấy giá trị
- * @return {Boolean|String|Number} Giá trị của trường đó
- * @example
- * const args = parseArg("kb2abot --version -s");
- * parseValue(args, ["version", "v"]);
- * // 1
- * parseValue(args, ["s"]);
- * // TRUE
- */
-export function parseValue(args, validList) {
-	for (const param in args) {
-		if (validList.indexOf(param) != -1) {
-			const value = args[param]
-			return typeof value == "object" ? value[value.length - 1] : value
-		}
-	}
-	return undefined
-}
-/**
- * Xóa 1 file theo đường dẫn
- * @param  {String} path Đường dẫn tới file
- * @example
- * deleteFile(__dirname + "/test.txt");
- * // *File test.txt sẽ bị xóa*
- */
-export function deleteFile(path) {
-	return new Promise((resolve, reject) => {
-		try {
-			fs.unlinkSync(path)
-			resolve()
-		} catch (e) {
-			reject(e)
-		}
-	})
-}
-/**
- * Lấy keyword của 1 đoạn tin nhắn
- * @param  {String} text Đoạn tin nhắn của người dùng
- * @return {String}      Keyword của lệnh đó
- * @example
- * getKeyword("/help")
- * // "help"
- * getKeyword("/ytmp3 -s 'Anh yeu em'")
- * // "ytmp3"
- */
-export function getKeyword(text) {
-	return text
-		.split(" ")
-		.slice(0, 1)[0]
-		.slice(1)
-}
-/**
- * Tính dung lượng của file (theo mb)
- * @param  {String} path Đường dẫn tới file
- * @return {Number}      Dung lượng của file (mb)
- * @example
- * // file test.txt có dung lượng 1024KB
- * getFileSize(__dirname + "/test.txt");
- * // 1
+ * // Example with 1024KB test.txt file
+ * getFileSize(__dirname + "/test.txt") // => 1
  */
 export function getFileSize(path) {
 	let fileSizeInBytes = fs.statSync(path)["size"]
@@ -208,29 +116,14 @@ export function getFileSize(path) {
 	let fileSizeInMegabytes = fileSizeInBytes / 1000000.0
 	return Math.round(fileSizeInMegabytes)
 }
+
 /**
- * Lấy tên file bỏ đuôi extension
- * @param  {String} text Tên file
- * @return {String}      Tên file không có đuôi
+ * Convert a number to a special code (according to the English alphabet)
+ * @param  {Number} number Number you want to transfer
+ * @return {String}        Special code 1 = "o", 2 = "t",...
  * @example
- * subname("test.txt");
- * // "test"
- */
-export function subname(text) {
-	return text
-		.split(".")
-		.slice(0, -1)
-		.join(".")
-}
-/**
- * Chuyển 1 số về dạng mật mã đặc biệt (theo bảng chữ cái tiếng anh)
- * @param  {Number} number Số bạn muốn chuyển
- * @return {String}        Mã đặc biệt 1 = "o", 2 = "t",...
- * @example
- * numbersToWords(123);
- * // "oth"
- * numbersToWords(18102004);
- * // "ogoztzzf"
+ * numbersToWords(123) // => "oth"
+ * numbersToWords(18102004) // => "ogoztzzf"
  */
 export function numberToPassword(number) {
 	const numbers = ["z", "o", "t", "h", "f", "i", "s", "e", "g", "n"]
@@ -240,35 +133,22 @@ export function numberToPassword(number) {
 	}
 	return str
 }
+
 /**
  *
- * @param  {String|Number} number Định dạng 1 string, number về dạng tiền tệ
- * @return {String}               Tiền tệ
+ * @param  {String|Number} number Format 1 string, number as VNĐ currency
+ * @return {String}               VNĐ Currency
  * @example
- * currencyFormat(1234567);
- * // "1,234,567"
+ * currencyFormat(1234567) // => "1,234,567"
  */
 export function currencyFormat(number) {
 	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
+
 /**
- * Lấy dữ liệu của tin nhắn câu lệnh
- * @param  {String} text Lệnh người dùng nhập
- * @return {String}      1 text với keyword đã bị bỏ
- * @example
- * getParam("/help hello, good morning!");
- * // "hello, good morning!"
- */
-export function getParam(text) {
-	return text
-		.split(" ")
-		.slice(1)
-		.join(" ")
-}
-/**
- * Loại bỏ các kí tự lạ trong văn bản
- * @param  {String} text Văn bản nào đó
- * @return {String}      Văn bản sạch
+ * Remove strange characters in text
+ * @param  {String} text Some text
+ * @return {String}      Clean text
  */
 export function removeSpecialChar(str) {
 	if (str === null || str === "") return false
@@ -279,25 +159,34 @@ export function removeSpecialChar(str) {
 }
 
 /**
- * thực hiện phép lấy giá trị ngẫu nhiên
+ * Get random value from [start; end]
  * @example
- * import { random } from "./common.util.js";
+ * import { random } from "kb2abot/util/common.js";
  *
- * random(1, 10)
- * // trả về giá trị ngẫu nhiên từ 1 đến 10
+ * random(1, 10) // maybe 3.141592658...
+ * // returns a random value from 1 to 10
  *
- * // lưu ý: vì phép ngẫu nhiên này không được làm tròn vì vậy bạn nên dùng random cùng với round
+ * // note: Since this random is not rounded so you should use random with round
  * @example
- * import { random, round } from "./common.util.js";
+ * import { random, round } from "kb2abot/util/common.js";
  *
- * round(random(1, 10), 2)
- * // trả về giá trị ngẫu nhiên từ 1 đến 10 và được làm chòn đến chữ số thập phân thứ hai
+ * round(random(1, 10), 2) // => maybe 3.14
+ * // Returns a random value from 1 to 10 and is rounded to the second decimal
  *
  */
 export function random(start, end) {
 	return Math.floor(Math.random() * (end - start + 1) + start)
 }
 
+/**
+ * Shuffle the array
+ * @param  {Array} arr Array to be shuffled
+ * @return {Array}     Shuffled array
+ * @example
+ * const arr = [1, 2, 3, 4]
+ * shuffle(arr) // => [2, 3, 1, 4]
+ * console.log(arr) => [2, 3, 1, 4]
+ */
 export function shuffle(arr) {
 	// thuật toán bogo-sort
 	let count = arr.length,
@@ -315,6 +204,13 @@ export function shuffle(arr) {
 	return arr //Bogosort with no điều kiện dừng
 }
 
+/**
+ * Verify a https url is valid or not
+ * @param  {string} url Https url
+ * @return {boolean}    Valid or not
+ * @example
+ * validURL("https://www.facebook.com/") // => true
+ */
 export function validURL(str) {
 	var pattern = new RegExp(
 		"^(https?:\\/\\/)?" + // protocol
@@ -328,6 +224,12 @@ export function validURL(str) {
 	return !!pattern.test(str)
 }
 
+/**
+ * Download a file to a path
+ * @async
+ * @param  {string} url  URL download
+ * @param  {string} path Path file
+ */
 export async function downloadFile(url, path) {
 	const res = await fetch(url)
 	const fileStream = fs.createWriteStream(path)
@@ -338,6 +240,13 @@ export async function downloadFile(url, path) {
 	})
 }
 
+/**
+ * Convert milis to time string
+ * @param  {Number} time milis
+ * @return {string} timestring
+ * @example
+ * convert_to_string_time(123456) // => "2m 4s"
+ */
 export function convert_to_string_time(time = 0) {
 	if (time < 0) time = 0
 	const hh = Math.floor(time / 1000 / 60 / 60)
@@ -349,6 +258,16 @@ export function convert_to_string_time(time = 0) {
 	return text
 }
 
+/**
+ * Compare two object in recursive
+ * @param  {object} x First object
+ * @param  {object} y Second object
+ * @return {boolean}   Is equal or not
+ * @example
+ * const a = {level1: {hello: "world"}}
+ * const b = {level1: {hello: "world"}}
+ * deepEqual(a, b) // => true
+ */
 export function deepEqual(x, y) {
 	if (x === y) {
 		return true

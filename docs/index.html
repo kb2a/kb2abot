@@ -1,39 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
+    <style type="text/css">
+    p {
+        font-family: Cursive;
+        font-size: 18px;
+    }
+
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <!-- Adding favicon -->
-    
-
     <!-- Adding meta -->
-    
-
     <!-- Adding external script-->
-    
-
     <!-- Adding external style-->
-    
-
     <!-- Adding scripts-->
-    
-
     <!-- Adding style-->
-    
-
     <!-- Adding overlay script-->
-    
-
     <!-- Adding overlay style-->
-    
-
-
     <title>
-      Home
+        Home
     </title>
-
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -42,227 +30,312 @@
     <link type="text/css" rel="stylesheet" href="styles/reset.css">
     <link type="text/css" rel="stylesheet" href="styles/clean-jsdoc-theme-base.css">
     <link type="text/css" rel="stylesheet" href="styles/clean-jsdoc-theme-light.css">
-    
-    <svg aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-    style="display:none">
-    <defs>
-        <symbol id="copy-icon" viewbox="0 0 488.3 488.3">
-            <g>
-                <path
-                    d="M314.25,85.4h-227c-21.3,0-38.6,17.3-38.6,38.6v325.7c0,21.3,17.3,38.6,38.6,38.6h227c21.3,0,38.6-17.3,38.6-38.6V124    C352.75,102.7,335.45,85.4,314.25,85.4z M325.75,449.6c0,6.4-5.2,11.6-11.6,11.6h-227c-6.4,0-11.6-5.2-11.6-11.6V124    c0-6.4,5.2-11.6,11.6-11.6h227c6.4,0,11.6,5.2,11.6,11.6V449.6z" />
-                <path
-                    d="M401.05,0h-227c-21.3,0-38.6,17.3-38.6,38.6c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5c0-6.4,5.2-11.6,11.6-11.6h227    c6.4,0,11.6,5.2,11.6,11.6v325.7c0,6.4-5.2,11.6-11.6,11.6c-7.5,0-13.5,6-13.5,13.5s6,13.5,13.5,13.5c21.3,0,38.6-17.3,38.6-38.6    V38.6C439.65,17.3,422.35,0,401.05,0z" />
-            </g>
-        </symbol>
-        <symbol id='search-icon' viewBox="0 0 512 512">
-            <g>
+    <svg aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display:none">
+        <defs>
+            <symbol id="copy-icon" viewbox="0 0 488.3 488.3">
                 <g>
-                    <path
-                        d="M225.474,0C101.151,0,0,101.151,0,225.474c0,124.33,101.151,225.474,225.474,225.474    c124.33,0,225.474-101.144,225.474-225.474C450.948,101.151,349.804,0,225.474,0z M225.474,409.323    c-101.373,0-183.848-82.475-183.848-183.848S124.101,41.626,225.474,41.626s183.848,82.475,183.848,183.848    S326.847,409.323,225.474,409.323z" />
+                    <path d="M314.25,85.4h-227c-21.3,0-38.6,17.3-38.6,38.6v325.7c0,21.3,17.3,38.6,38.6,38.6h227c21.3,0,38.6-17.3,38.6-38.6V124    C352.75,102.7,335.45,85.4,314.25,85.4z M325.75,449.6c0,6.4-5.2,11.6-11.6,11.6h-227c-6.4,0-11.6-5.2-11.6-11.6V124    c0-6.4,5.2-11.6,11.6-11.6h227c6.4,0,11.6,5.2,11.6,11.6V449.6z" />
+                    <path d="M401.05,0h-227c-21.3,0-38.6,17.3-38.6,38.6c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5c0-6.4,5.2-11.6,11.6-11.6h227    c6.4,0,11.6,5.2,11.6,11.6v325.7c0,6.4-5.2,11.6-11.6,11.6c-7.5,0-13.5,6-13.5,13.5s6,13.5,13.5,13.5c21.3,0,38.6-17.3,38.6-38.6    V38.6C439.65,17.3,422.35,0,401.05,0z" />
                 </g>
-            </g>
-            <g>
+            </symbol>
+            <symbol id='search-icon' viewBox="0 0 512 512">
                 <g>
-                    <path
-                        d="M505.902,476.472L386.574,357.144c-8.131-8.131-21.299-8.131-29.43,0c-8.131,8.124-8.131,21.306,0,29.43l119.328,119.328    c4.065,4.065,9.387,6.098,14.715,6.098c5.321,0,10.649-2.033,14.715-6.098C514.033,497.778,514.033,484.596,505.902,476.472z" />
+                    <g>
+                        <path d="M225.474,0C101.151,0,0,101.151,0,225.474c0,124.33,101.151,225.474,225.474,225.474    c124.33,0,225.474-101.144,225.474-225.474C450.948,101.151,349.804,0,225.474,0z M225.474,409.323    c-101.373,0-183.848-82.475-183.848-183.848S124.101,41.626,225.474,41.626s183.848,82.475,183.848,183.848    S326.847,409.323,225.474,409.323z" />
+                    </g>
                 </g>
-            </g>
-        </symbol>
-        <symbol id="down-icon" viewBox="0 0 16 16">
-            <path 
-                fill-rule="evenodd" 
-                clip-rule="evenodd" 
-                d="M12.7803 6.21967C13.0732 6.51256 13.0732 6.98744 12.7803 7.28033L8.53033 11.5303C8.23744 11.8232 7.76256 11.8232 7.46967 11.5303L3.21967 7.28033C2.92678 6.98744 2.92678 6.51256 3.21967 6.21967C3.51256 5.92678 3.98744 5.92678 4.28033 6.21967L8 9.93934L11.7197 6.21967C12.0126 5.92678 12.4874 5.92678 12.7803 6.21967Z"
-            >
-            </path>
-        </symbol>
-    </defs>
-</svg>
-  </head>
+                <g>
+                    <g>
+                        <path d="M505.902,476.472L386.574,357.144c-8.131-8.131-21.299-8.131-29.43,0c-8.131,8.124-8.131,21.306,0,29.43l119.328,119.328    c4.065,4.065,9.387,6.098,14.715,6.098c5.321,0,10.649-2.033,14.715-6.098C514.033,497.778,514.033,484.596,505.902,476.472z" />
+                    </g>
+                </g>
+            </symbol>
+            <symbol id="down-icon" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12.7803 6.21967C13.0732 6.51256 13.0732 6.98744 12.7803 7.28033L8.53033 11.5303C8.23744 11.8232 7.76256 11.8232 7.46967 11.5303L3.21967 7.28033C2.92678 6.98744 2.92678 6.51256 3.21967 6.21967C3.51256 5.92678 3.98744 5.92678 4.28033 6.21967L8 9.93934L11.7197 6.21967C12.0126 5.92678 12.4874 5.92678 12.7803 6.21967Z">
+                </path>
+            </symbol>
+        </defs>
+    </svg>
+</head>
 
-  <body>
-
+<body>
     <nav class="navbar" id="navbar">
-      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">Home</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="3533383" > <h3 class="accordion-heading">Modules<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion collapsed child" id=1662429><div class="accordion-heading child"><a href="module-Datastore.html">Datastore</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="module-Datastore.html#.model">model</a></li></ul></li><li class="accordion collapsed child" id=8775488><div class="accordion-heading child"><a href="Util.module_Common.html">Common</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Util.module_Common.html#.asyncWait">asyncWait</a></li><li data-type='method'><a href="Util.module_Common.html#.constrain">constrain</a></li><li data-type='method'><a href="Util.module_Common.html#.currencyFormat">currencyFormat</a></li><li data-type='method'><a href="Util.module_Common.html#.deleteFile">deleteFile</a></li><li data-type='method'><a href="Util.module_Common.html#.extend">extend</a></li><li data-type='method'><a href="Util.module_Common.html#.getFileSize">getFileSize</a></li><li data-type='method'><a href="Util.module_Common.html#.getKeyword">getKeyword</a></li><li data-type='method'><a href="Util.module_Common.html#.getParam">getParam</a></li><li data-type='method'><a href="Util.module_Common.html#.numberToPassword">numberToPassword</a></li><li data-type='method'><a href="Util.module_Common.html#.parseArgs">parseArgs</a></li><li data-type='method'><a href="Util.module_Common.html#.parseValue">parseValue</a></li><li data-type='method'><a href="Util.module_Common.html#.random">random</a></li><li data-type='method'><a href="Util.module_Common.html#.removeSpecialChar">removeSpecialChar</a></li><li data-type='method'><a href="Util.module_Common.html#.round">round</a></li><li data-type='method'><a href="Util.module_Common.html#.subname">subname</a></li></ul></li><li class="accordion collapsed child" id=9410037><div class="accordion-heading child"><a href="Util.module_Fca.html">Fca</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Util.module_Fca.html#~getUsername">getUsername</a></li><li data-type='method'><a href="Util.module_Fca.html#~promisify">promisify</a></li></ul></li><li class="accordion collapsed child" id=6849240><div class="accordion-heading child"><a href="Util.module_Translate.html">Translate</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Util.module_Translate.html#~bing">bing</a></li><li data-type='method'><a href="Util.module_Translate.html#~bing">bing</a></li><li data-type='method'><a href="Util.module_Translate.html#~detect">detect</a></li></ul></li></ul> </div><div class="accordion collapsed" id="4600245" > <h3 class="accordion-heading">Classes<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion collapsed child" id=2387128><div class="accordion-heading child"><a href="Command.html">Command</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Command.html#add">add</a></li><li data-type='method'><a href="Command.html#forEach">forEach</a></li><li data-type='method'><a href="Command.html#load">load</a></li><li data-type='method'><a href="Command.html#onCall">onCall</a></li><li data-type='method'><a href="Command.html#recursiveFind">recursiveFind</a></li></ul></li><li class="accordion collapsed child" id=6916253><div class="accordion-heading child"><a href="Manager.html">Manager</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Manager.html#clear">clear</a></li><li data-type='method'><a href="Manager.html#first">first</a></li><li data-type='method'><a href="Manager.html#get">get</a></li><li data-type='method'><a href="Manager.html#last">last</a></li><li data-type='method'><a href="Manager.html#push">push</a></li><li data-type='method'><a href="Manager.html#remove">remove</a></li></ul></li><li class="accordion collapsed child" id=9613402><div class="accordion-heading child"><a href="Plugin.html">Plugin</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Plugin.html#load">load</a></li><li data-type='method'><a href="Plugin.html#onDisable">onDisable</a></li><li data-type='method'><a href="Plugin.html#onEnable">onEnable</a></li><li data-type='method'><a href="Plugin.html#setEnable">setEnable</a></li></ul></li><li class="accordion collapsed child" id=1469970><div class="accordion-heading child"><a href="PluginManager.html">PluginManager</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="PluginManager.html#add">add</a></li><li data-type='method'><a href="PluginManager.html#getConfig">getConfig</a></li><li data-type='method'><a href="PluginManager.html#getUserdata">getUserdata</a></li></ul></li></ul> </div><div class="accordion collapsed" id="6998184" > <h3 class="accordion-heading">Global<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="global.html#checkCredential">checkCredential</a></li><li class="accordion-list" id=""><a href="global.html#CommandOptions">CommandOptions</a></li><li class="accordion-list" id=""><a href="global.html#convertAtpToAppstate">convertAtpToAppstate</a></li><li class="accordion-list" id=""><a href="global.html#convertJ2teamToAppstate">convertJ2teamToAppstate</a></li><li class="accordion-list" id=""><a href="global.html#facebook">facebook</a></li><li class="accordion-list" id=""><a href="global.html#getCookieType">getCookieType</a></li><li class="accordion-list" id=""><a href="global.html#isUsingCookie">isUsingCookie</a></li><li class="accordion-list" id=""><a href="global.html#reply">reply</a></li></ul> </div>
-      
-
+        <div class="navbar-heading" id="navbar-heading"><a href="index.html">
+                <h2 class="navbar-heading-text">Home</h2>
+            </a></div>
+        <div class="search-box" id="search-box">
+            <div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon">
+                    <use xlink:href="#search-icon"></use>
+                </svg></div>
+            <div class="search-item-container" id="search-item-container">
+                <ul class="search-item-ul" id="search-item-ul"></ul>
+            </div>
+        </div>
+        <div class="sidebar-main-content" id="sidebar-main-content">
+            <div class="accordion collapsed" id="3353192">
+                <h3 class="accordion-heading">Modules<svg>
+                        <use xlink:href="#down-icon"></use>
+                    </svg></h3>
+                <ul class="accordion-content">
+                    <li class="accordion collapsed child" id=3869785>
+                        <div class="accordion-heading child"><a href="module-Common.html">Common</a><svg>
+                                <use xlink:href="#down-icon"></use>
+                            </svg></div>
+                        <ul class='methods accordion-content'>
+                            <li data-type='method'><a href="module-Common.html#.asyncWait">asyncWait</a></li>
+                            <li data-type='method'><a href="module-Common.html#.constrain">constrain</a></li>
+                            <li data-type='method'><a href="module-Common.html#.convert_to_string_time">convert_to_string_time</a></li>
+                            <li data-type='method'><a href="module-Common.html#.currencyFormat">currencyFormat</a></li>
+                            <li data-type='method'><a href="module-Common.html#.deepEqual">deepEqual</a></li>
+                            <li data-type='method'><a href="module-Common.html#.downloadFile">downloadFile</a></li>
+                            <li data-type='method'><a href="module-Common.html#.extend">extend</a></li>
+                            <li data-type='method'><a href="module-Common.html#.getFileSize">getFileSize</a></li>
+                            <li data-type='method'><a href="module-Common.html#.numberToPassword">numberToPassword</a></li>
+                            <li data-type='method'><a href="module-Common.html#.random">random</a></li>
+                            <li data-type='method'><a href="module-Common.html#.removeSpecialChar">removeSpecialChar</a></li>
+                            <li data-type='method'><a href="module-Common.html#.round">round</a></li>
+                            <li data-type='method'><a href="module-Common.html#.shuffle">shuffle</a></li>
+                            <li data-type='method'><a href="module-Common.html#.validURL">validURL</a></li>
+                        </ul>
+                    </li>
+                    <li class="accordion collapsed child" id=1018977>
+                        <div class="accordion-heading child"><a href="module-Datastore.html">Datastore</a><svg>
+                                <use xlink:href="#down-icon"></use>
+                            </svg></div>
+                        <ul class='methods accordion-content'>
+                            <li data-type='method'><a href="module-Datastore.html#.model">model</a></li>
+                        </ul>
+                    </li>
+                    <li class="accordion collapsed child" id=3210317>
+                        <div class="accordion-heading child"><a href="Util.module_Fca.html">Fca</a><svg>
+                                <use xlink:href="#down-icon"></use>
+                            </svg></div>
+                        <ul class='methods accordion-content'>
+                            <li data-type='method'><a href="Util.module_Fca.html#~getUsername">getUsername</a></li>
+                            <li data-type='method'><a href="Util.module_Fca.html#~promisify">promisify</a></li>
+                        </ul>
+                    </li>
+                    <li class="accordion collapsed child" id=1842628>
+                        <div class="accordion-heading child"><a href="Util.module_Translate.html">Translate</a><svg>
+                                <use xlink:href="#down-icon"></use>
+                            </svg></div>
+                        <ul class='methods accordion-content'>
+                            <li data-type='method'><a href="Util.module_Translate.html#~bing">bing</a></li>
+                            <li data-type='method'><a href="Util.module_Translate.html#~bing">bing</a></li>
+                            <li data-type='method'><a href="Util.module_Translate.html#~detect">detect</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="accordion collapsed" id="4646286">
+                <h3 class="accordion-heading">Classes<svg>
+                        <use xlink:href="#down-icon"></use>
+                    </svg></h3>
+                <ul class="accordion-content">
+                    <li class="accordion collapsed child" id=6238492>
+                        <div class="accordion-heading child"><a href="Command.html">Command</a><svg>
+                                <use xlink:href="#down-icon"></use>
+                            </svg></div>
+                        <ul class='methods accordion-content'>
+                            <li data-type='method'><a href="Command.html#add">add</a></li>
+                            <li data-type='method'><a href="Command.html#forEach">forEach</a></li>
+                            <li data-type='method'><a href="Command.html#load">load</a></li>
+                            <li data-type='method'><a href="Command.html#onCall">onCall</a></li>
+                            <li data-type='method'><a href="Command.html#recursiveFind">recursiveFind</a></li>
+                        </ul>
+                    </li>
+                    <li class="accordion collapsed child" id=3005185>
+                        <div class="accordion-heading child"><a href="Manager.html">Manager</a><svg>
+                                <use xlink:href="#down-icon"></use>
+                            </svg></div>
+                        <ul class='methods accordion-content'>
+                            <li data-type='method'><a href="Manager.html#clear">clear</a></li>
+                            <li data-type='method'><a href="Manager.html#first">first</a></li>
+                            <li data-type='method'><a href="Manager.html#get">get</a></li>
+                            <li data-type='method'><a href="Manager.html#last">last</a></li>
+                            <li data-type='method'><a href="Manager.html#push">push</a></li>
+                            <li data-type='method'><a href="Manager.html#remove">remove</a></li>
+                        </ul>
+                    </li>
+                    <li class="accordion collapsed child" id=828969>
+                        <div class="accordion-heading child"><a href="Plugin.html">Plugin</a><svg>
+                                <use xlink:href="#down-icon"></use>
+                            </svg></div>
+                        <ul class='methods accordion-content'>
+                            <li data-type='method'><a href="Plugin.html#load">load</a></li>
+                            <li data-type='method'><a href="Plugin.html#onDisable">onDisable</a></li>
+                            <li data-type='method'><a href="Plugin.html#onEnable">onEnable</a></li>
+                            <li data-type='method'><a href="Plugin.html#setEnable">setEnable</a></li>
+                        </ul>
+                    </li>
+                    <li class="accordion collapsed child" id=6079193>
+                        <div class="accordion-heading child"><a href="PluginManager.html">PluginManager</a><svg>
+                                <use xlink:href="#down-icon"></use>
+                            </svg></div>
+                        <ul class='methods accordion-content'>
+                            <li data-type='method'><a href="PluginManager.html#add">add</a></li>
+                            <li data-type='method'><a href="PluginManager.html#getConfig">getConfig</a></li>
+                            <li data-type='method'><a href="PluginManager.html#getUserdata">getUserdata</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="accordion collapsed" id="4324341">
+                <h3 class="accordion-heading">Global<svg>
+                        <use xlink:href="#down-icon"></use>
+                    </svg></h3>
+                <ul class="accordion-content">
+                    <li class="accordion-list" id=""><a href="global.html#checkCredential">checkCredential</a></li>
+                    <li class="accordion-list" id=""><a href="global.html#CommandOptions">CommandOptions</a></li>
+                    <li class="accordion-list" id=""><a href="global.html#convertAtpToAppstate">convertAtpToAppstate</a></li>
+                    <li class="accordion-list" id=""><a href="global.html#convertJ2teamToAppstate">convertJ2teamToAppstate</a></li>
+                    <li class="accordion-list" id=""><a href="global.html#facebook">facebook</a></li>
+                    <li class="accordion-list" id=""><a href="global.html#getCookieType">getCookieType</a></li>
+                    <li class="accordion-list" id=""><a href="global.html#isUsingCookie">isUsingCookie</a></li>
+                    <li class="accordion-list" id=""><a href="global.html#reply">reply</a></li>
+                </ul>
+            </div>
     </nav>
     <div class="navbar-ham" id="navbar-ham">
-      <div>
-        <div class="first"></div>
-        <div class="second"></div>
-        <div class="third"></div>
-      </div>
+        <div>
+            <div class="first"></div>
+            <div class="second"></div>
+            <div class="third"></div>
+        </div>
     </div>
-
     <div id="main" class="main-content">
-      
-
-      
-
-
-
-    
-
-
-
-
-
-
-
-
-
-    
-
-
-    <section class="readme">
-        <article><h1 align="center">
-	<a href="#"><img src="https://i.imgur.com/u6eJA84.png" alt="susbot"></a>
-</h1>
-<p align="center">
-	<img alt="size" src="https://img.shields.io/github/repo-size/susbot/susbot.svg?style=flat-square&label=size">
-	<img alt="code-version" src="https://img.shields.io/badge/dynamic/json?color=red&label=code%20version&prefix=v&query=%24.version&url=https://raw.githubusercontent.com/kb2ateam/kb2abot/main/package.json&style=flat-square">
-	<a href="https://github.com/susbot/susbot/commits"><img alt="commits" src="https://img.shields.io/github/commit-activity/m/susbot/susbot.svg?label=commit&style=flat-square"></a>
-	<a href="https://www.codefactor.io/repository/github/kb2ateam/kb2abot"><img src="https://www.codefactor.io/repository/github/kb2ateam/kb2abot/badge" alt="CodeFactor" /></a>
-</p>
-<h2>About</h2>
-<p>kb2abot is a powerful <a href="https://nodejs.org">Node.js</a> module that allows you to easily interact with the
-<a href="https://github.com/Schmavery/facebook-chat-api">Facebook Chat API</a> and more!</p>
-<ul>
-<li>Object-oriented</li>
-<li>Performant</li>
-<li>Easy to use</li>
-</ul>
-<h2>Installation</h2>
-<p><strong>Node.js 16.6.0 or newer is required.</strong></p>
-<pre class="prettyprint source lang-sh-session"><code>npm install kb2abot
+        <section class="readme">
+            <article>
+                <h1 align="center">
+                    <a href="#"><img src="https://i.imgur.com/u6eJA84.png" alt="kb2abot"></a>
+                </h1>
+                <p align="center">
+                    <img alt="size" src="https://img.shields.io/github/repo-size/kb2ateam/kb2abot-core.svg?style=flat-square&label=size">
+                    <img alt="code-version" src="https://img.shields.io/badge/dynamic/json?color=red&label=code%20version&prefix=v&query=%24.version&url=https://raw.githubusercontent.com/kb2ateam/kb2abot/main/package.json&style=flat-square">
+                    <a href="https://github.com/kb2ateam/kb2abot/commits"><img alt="commits" src="https://img.shields.io/github/commit-activity/m/kb2ateam/kb2abot.svg?label=commit&style=flat-square"></a>
+                    <a href="https://www.codefactor.io/repository/github/kb2ateam/kb2abot"><img src="https://www.codefactor.io/repository/github/kb2ateam/kb2abot/badge" alt="CodeFactor" /></a>
+                </p>
+                <h2>About</h2>
+                <p>kb2abot is a powerful <a href="https://nodejs.org">Node.js</a> module that allows you to easily interact with the
+                    <a href="https://github.com/Schmavery/facebook-chat-api">Facebook Chat API</a> and more!</p>
+                <ul>
+                    <li>Object-oriented</li>
+                    <li>Performant</li>
+                    <li>Easy to use</li>
+                </ul>
+                <h2>Installation</h2>
+                <p><strong>Node.js 16.6.0 or newer is required.</strong></p>
+                <pre class="prettyprint source lang-sh-session"><code>npm install kb2abot
 yarn add kb2abot
 pnpm add kb2abot
 </code></pre>
-<h2>Example usage</h2>
-<p>Create a report command (report bug/error to specific user on Facebook):</p>
-<pre class="prettyprint source lang-js"><code>import {Command} from &quot;kb2abot&quot;
+                <h2>Example usage</h2>
+                <p>Create a report command (report bug/error to specific user on Facebook):</p>
+                <pre class="prettyprint source lang-js"><code>import {Command} from &quot;kb2abot&quot;
 const khoakomlemID = &quot;100007723935647&quot;
 
 class Report extends Command {
-	keywords = [&quot;report&quot;, &quot;bug&quot;];
-	description = &quot;report bug/error to admin&quot;;
-	guide = &quot;&lt;message>&quot;;
-	permission = {
-		&quot;*&quot;: &quot;*&quot;
-	};
+    keywords = [&quot;report&quot;, &quot;bug&quot;];
+    description = &quot;report bug/error to admin&quot;;
+    guide = &quot;&lt;message>&quot;;
+    permission = {
+        &quot;*&quot;: &quot;*&quot;
+    };
 
-	// Called after this command is constructored, you would wrap your &quot;async this.add(command)&quot; in this function in order to load commands in synchronous
-	async load() {}
+    // Called after this command is constructored, you would wrap your &quot;async this.add(command)&quot; in this function in order to load commands in synchronous
+    async load() {}
 
-	// Called when user hits command
-	async onCall(thread, message, reply, api) {
-		const msg = message.args[0]
-		if (msg.length > 0) {
-			await api.sendMessage(`&quot;${msg}&quot;\n\n-ID: ${message.senderID}`, khoakomlemID )
-			return `Sent: ${msg}`
-		}
-		return &quot;Error: Empty message not allowed&quot;
-	}
+    // Called when user hits command
+    async onCall(thread, message, reply, api) {
+        const msg = message.args[0]
+        if (msg.length > 0) {
+            await api.sendMessage(`&quot;${msg}&quot;\n\n-ID: ${message.senderID}`, khoakomlemID )
+            return `Sent: ${msg}`
+        }
+        return &quot;Error: Empty message not allowed&quot;
+    }
 }
 const reportCommand = new Report()
 </code></pre>
-<p>Afterwards we add that <strong>command</strong> to a <strong>plugin</strong>:</p>
-<pre class="prettyprint source lang-js"><code>import {readFileSync} from &quot;fs&quot;
+                <p>Afterwards we add that <strong>command</strong> to a <strong>plugin</strong>:</p>
+                <pre class="prettyprint source lang-js"><code>import {readFileSync} from &quot;fs&quot;
 import {resolve} from &quot;url&quot;
 import {Plugin} from &quot;kb2abot&quot;
 import configTemplate from &quot;./template/config&quot;
 import userdataTemplate from &quot;./template/userdata&quot;
 
 class MyPlugin extends Plugin {
-	package = JSON.parse(
-		readFileSync(new URL(resolve(import.meta.url, &quot;package.json&quot;)))
-	);
-	configTemplate = configTemplate;
-	userdataTemplate = userdataTemplate;
+    package = JSON.parse(
+        readFileSync(new URL(resolve(import.meta.url, &quot;package.json&quot;)))
+    );
+    configTemplate = configTemplate;
+    userdataTemplate = userdataTemplate;
 
-	// Called after this plugin is constructored (you would wrap your &quot;async this.commands.add(command)&quot; in this function in order to load commands in synchronous)
-	async load() {
-		// Add report command to this plugin
-		await this.commands.add(reportCommand)
-	}
+    // Called after this plugin is constructored (you would wrap your &quot;async this.commands.add(command)&quot; in this function in order to load commands in synchronous)
+    async load() {
+        // Add report command to this plugin
+        await this.commands.add(reportCommand)
+    }
 
-	// Called when this plugin is disabled
-	async onDisable() {}
+    // Called when this plugin is disabled
+    async onDisable() {}
 
-	// Called when this plugin is enabled
-	async onEnable() {}
+    // Called when this plugin is enabled
+    async onEnable() {}
 }
 const myPlugin = new MyPlugin()
 </code></pre>
-<p>And we add that <strong>plugin</strong> to a <strong>plugin manager</strong></p>
-<pre class="prettyprint source lang-js"><code>import {PluginManager} from &quot;kb2abot&quot;
+                <p>And we add that <strong>plugin</strong> to a <strong>plugin manager</strong></p>
+                <pre class="prettyprint source lang-js"><code>import {PluginManager} from &quot;kb2abot&quot;
 const configDirectory = &quot;./someconf&quot; // Store the plugin's configs (use relative path to your current file, not process.cwd())
 const userdataDirectory = &quot;./somedata&quot; // Store the plugin's userdata (use relative path to your current file, not process.cwd())
 const pluginManager = new PluginManager(configDirectory, userdataDirectory)
 await pluginManager.add(myPlugin)
 </code></pre>
-<p>Finally, now we going to add  <strong>pluginManager</strong> to hook function:</p>
-<pre class="prettyprint source lang-js"><code>import {Deploy} from &quot;kb2abot&quot;
+                <p>Finally, now we going to add <strong>pluginManager</strong> to hook function:</p>
+                <pre class="prettyprint source lang-js"><code>import {Deploy} from &quot;kb2abot&quot;
 const botOptions = JSON.parse(fs.readFileSync(&quot;./bots/bot.js&quot;))
 </code></pre>
-<p>This is options of your bot (see example template at <a href="https://github.com/kb2ateam/kb2abot-bootloader/bots/example-bot.js">example-bot.js</a>)</p>
-<pre class="prettyprint source lang-js"><code>const client = await Deploy.facebook(botOptions.credential, {
-	apiOptions: botOptions.fcaOptions,
-	pluginManager: pluginManager
+                <p>This is options of your bot (see example template at <a href="https://github.com/kb2ateam/kb2abot-bootloader/bots/example-bot.js">example-bot.js</a>)</p>
+                <pre class="prettyprint source lang-js"><code>const client = await Deploy.facebook(botOptions.credential, {
+    apiOptions: botOptions.fcaOptions,
+    pluginManager: pluginManager
 })
 </code></pre>
-<p>All done! Now, imagine a user sending a message with body: &quot;/report Hello admin&quot;, the bot will reply &quot;Sent: Hello admin&quot;. Now you can code what you want and create a wonderful bot 🌟</p>
-<h2>Links</h2>
-<ul>
-<li><a href="https://kb2ateam.github.io/kb2abot-core/">Documentation</a></li>
-<li><a href="https://www.npmjs.com/package/kb2abot">npm</a></li>
-</ul>
-<h2>Contributing</h2>
-<p>Before creating an issue, please ensure that it hasn't already been reported/suggested
-See <a href="https://github.com/kb2ateam/kb2abot/blob/main/.github/CONTRIBUTING.md">the contribution guide</a> if you'd like to submit a PR.</p>
-<h2>Help</h2>
-<p>If you don't understand something in the documentation, you are experiencing problems, or you just need a gentle nudge in the right direction, please don't hesitate to join our community <a href="https://discord.gg/djs">KB2A Community</a>.</p></article>
-    </section>
-
-
-
-
-
-
+                <p>All done! Now, imagine a user sending a message with body: &quot;/report Hello admin&quot;, the bot will reply &quot;Sent: Hello admin&quot;. Now you can code what you want and create a wonderful bot 🌟</p>
+                <h2>Links</h2>
+                <ul>
+                    <li><a href="https://kb2ateam.github.io/kb2abot-core/">Documentation</a></li>
+                    <li><a href="https://www.npmjs.com/package/kb2abot">npm</a></li>
+                </ul>
+                <h2>Contributing</h2>
+                <p>Before creating an issue, please ensure that it hasn't already been reported/suggested
+                    See <a href="https://github.com/kb2ateam/kb2abot/blob/main/.github/CONTRIBUTING.md">the contribution guide</a> if you'd like to submit a PR.</p>
+                <h2>Help</h2>
+                <p>If you don't understand something in the documentation, you are experiencing problems, or you just need a gentle nudge in the right direction, please don't hesitate to join our community <a href="https://discord.gg/djs">KB2A Community</a>.</p>
+            </article>
+        </section>
     </div>
-
     <footer class="footer" id="footer">
-      
     </footer>
-
     <script src="scripts/third-party/prettify.js"></script>
     <script src="scripts/third-party/lang-css.js"></script>
     <script type="text/javascript" src="scripts/misc.js"></script>
+    <script>
+    prettyPrint();
 
-    <script>prettyPrint();</script>
+    </script>
     <script src="scripts/linenumber.js"></script>
     <script src="scripts/fix-code-block.js"></script>
     <script src="scripts/fix-navbar.js"></script>
-    
-      <script src="scripts/search.js"></script>
-      <script src="scripts/third-party/fuse.js"></script>
-      <script>
-        var list = [{"title":"Datastore","link":"<a href=\"module-Datastore.html\">Datastore</a>"},{"title":"module:Datastore.model","link":"<a href=\"module-Datastore.html#.model\">module:Datastore.model &rtrif; undefined</a>"},{"title":"Common","link":"<a href=\"Util.module_Common.html\">Common</a>"},{"title":"Util.module:Common.asyncWait","link":"<a href=\"Util.module_Common.html#.asyncWait\">Util.module:Common.asyncWait &rtrif; undefined</a>"},{"title":"Util.module:Common.constrain","link":"<a href=\"Util.module_Common.html#.constrain\">Util.module:Common.constrain &rtrif; undefined</a>"},{"title":"Util.module:Common.currencyFormat","link":"<a href=\"Util.module_Common.html#.currencyFormat\">Util.module:Common.currencyFormat &rtrif; undefined</a>"},{"title":"Util.module:Common.deleteFile","link":"<a href=\"Util.module_Common.html#.deleteFile\">Util.module:Common.deleteFile &rtrif; undefined</a>"},{"title":"Util.module:Common.extend","link":"<a href=\"Util.module_Common.html#.extend\">Util.module:Common.extend &rtrif; undefined</a>"},{"title":"Util.module:Common.getFileSize","link":"<a href=\"Util.module_Common.html#.getFileSize\">Util.module:Common.getFileSize &rtrif; undefined</a>"},{"title":"Util.module:Common.getKeyword","link":"<a href=\"Util.module_Common.html#.getKeyword\">Util.module:Common.getKeyword &rtrif; undefined</a>"},{"title":"Util.module:Common.getParam","link":"<a href=\"Util.module_Common.html#.getParam\">Util.module:Common.getParam &rtrif; undefined</a>"},{"title":"Util.module:Common.numberToPassword","link":"<a href=\"Util.module_Common.html#.numberToPassword\">Util.module:Common.numberToPassword &rtrif; undefined</a>"},{"title":"Util.module:Common.parseArgs","link":"<a href=\"Util.module_Common.html#.parseArgs\">Util.module:Common.parseArgs &rtrif; undefined</a>"},{"title":"Util.module:Common.parseValue","link":"<a href=\"Util.module_Common.html#.parseValue\">Util.module:Common.parseValue &rtrif; undefined</a>"},{"title":"Util.module:Common.random","link":"<a href=\"Util.module_Common.html#.random\">Util.module:Common.random &rtrif; undefined</a>"},{"title":"Util.module:Common.removeSpecialChar","link":"<a href=\"Util.module_Common.html#.removeSpecialChar\">Util.module:Common.removeSpecialChar &rtrif; undefined</a>"},{"title":"Util.module:Common.round","link":"<a href=\"Util.module_Common.html#.round\">Util.module:Common.round &rtrif; undefined</a>"},{"title":"Util.module:Common.subname","link":"<a href=\"Util.module_Common.html#.subname\">Util.module:Common.subname &rtrif; undefined</a>"},{"title":"Fca","link":"<a href=\"Util.module_Fca.html\">Fca</a>"},{"title":"Util.module:Fca~getUsername","link":"<a href=\"Util.module_Fca.html#~getUsername\">Util.module:Fca~getUsername &rtrif; undefined</a>"},{"title":"Util.module:Fca~promisify","link":"<a href=\"Util.module_Fca.html#~promisify\">Util.module:Fca~promisify &rtrif; undefined</a>"},{"title":"Translate","link":"<a href=\"Util.module_Translate.html\">Translate</a>"},{"title":"Util.module:Translate~bing","link":"<a href=\"Util.module_Translate.html#~bing\">Util.module:Translate~bing &rtrif; undefined</a>"},{"title":"Util.module:Translate~bing","link":"<a href=\"Util.module_Translate.html#~bing\">Util.module:Translate~bing &rtrif; undefined</a>"},{"title":"Util.module:Translate~detect","link":"<a href=\"Util.module_Translate.html#~detect\">Util.module:Translate~detect &rtrif; undefined</a>"},{"title":"Command","link":"<a href=\"Command.html\">Command</a>"},{"title":"Command#add","link":"<a href=\"Command.html#add\">Command &rtrif; add</a>"},{"title":"Command#forEach","link":"<a href=\"Command.html#forEach\">Command &rtrif; forEach</a>"},{"title":"Command#load","link":"<a href=\"Command.html#load\">Command &rtrif; load</a>"},{"title":"Command#onCall","link":"<a href=\"Command.html#onCall\">Command &rtrif; onCall</a>"},{"title":"Command#recursiveFind","link":"<a href=\"Command.html#recursiveFind\">Command &rtrif; recursiveFind</a>"},{"title":"Manager","link":"<a href=\"Manager.html\">Manager</a>"},{"title":"Manager#clear","link":"<a href=\"Manager.html#clear\">Manager &rtrif; clear</a>"},{"title":"Manager#first","link":"<a href=\"Manager.html#first\">Manager &rtrif; first</a>"},{"title":"Manager#get","link":"<a href=\"Manager.html#get\">Manager &rtrif; get</a>"},{"title":"Manager#last","link":"<a href=\"Manager.html#last\">Manager &rtrif; last</a>"},{"title":"Manager#push","link":"<a href=\"Manager.html#push\">Manager &rtrif; push</a>"},{"title":"Manager#remove","link":"<a href=\"Manager.html#remove\">Manager &rtrif; remove</a>"},{"title":"Plugin","link":"<a href=\"Plugin.html\">Plugin</a>"},{"title":"Plugin#load","link":"<a href=\"Plugin.html#load\">Plugin &rtrif; load</a>"},{"title":"Plugin#onDisable","link":"<a href=\"Plugin.html#onDisable\">Plugin &rtrif; onDisable</a>"},{"title":"Plugin#onEnable","link":"<a href=\"Plugin.html#onEnable\">Plugin &rtrif; onEnable</a>"},{"title":"Plugin#setEnable","link":"<a href=\"Plugin.html#setEnable\">Plugin &rtrif; setEnable</a>"},{"title":"PluginManager","link":"<a href=\"PluginManager.html\">PluginManager</a>"},{"title":"PluginManager#add","link":"<a href=\"PluginManager.html#add\">PluginManager &rtrif; add</a>"},{"title":"PluginManager#getConfig","link":"<a href=\"PluginManager.html#getConfig\">PluginManager &rtrif; getConfig</a>"},{"title":"PluginManager#getUserdata","link":"<a href=\"PluginManager.html#getUserdata\">PluginManager &rtrif; getUserdata</a>"},{"title":"checkCredential","link":"<a href=\"global.html#checkCredential\">checkCredential</a>"},{"title":"CommandOptions","link":"<a href=\"global.html#CommandOptions\">CommandOptions</a>"},{"title":"convertAtpToAppstate","link":"<a href=\"global.html#convertAtpToAppstate\">convertAtpToAppstate</a>"},{"title":"convertJ2teamToAppstate","link":"<a href=\"global.html#convertJ2teamToAppstate\">convertJ2teamToAppstate</a>"},{"title":"facebook","link":"<a href=\"global.html#facebook\">facebook</a>"},{"title":"getCookieType","link":"<a href=\"global.html#getCookieType\">getCookieType</a>"},{"title":"isUsingCookie","link":"<a href=\"global.html#isUsingCookie\">isUsingCookie</a>"},{"title":"reply","link":"<a href=\"global.html#reply\">reply</a>"}];
-        var options = 
-          setupSearch(list, options)
-      </script>
-    
+    <script src="scripts/search.js"></script>
+    <script src="scripts/third-party/fuse.js"></script>
+    <script>
+    var list = [{ "title": "Common", "link": "<a href=\"module-Common.html\">Common</a>" }, { "title": "module:Common.asyncWait", "link": "<a href=\"module-Common.html#.asyncWait\">module:Common.asyncWait &rtrif; undefined</a>" }, { "title": "module:Common.constrain", "link": "<a href=\"module-Common.html#.constrain\">module:Common.constrain &rtrif; undefined</a>" }, { "title": "module:Common.convert_to_string_time", "link": "<a href=\"module-Common.html#.convert_to_string_time\">module:Common.convert_to_string_time &rtrif; undefined</a>" }, { "title": "module:Common.currencyFormat", "link": "<a href=\"module-Common.html#.currencyFormat\">module:Common.currencyFormat &rtrif; undefined</a>" }, { "title": "module:Common.deepEqual", "link": "<a href=\"module-Common.html#.deepEqual\">module:Common.deepEqual &rtrif; undefined</a>" }, { "title": "module:Common.downloadFile", "link": "<a href=\"module-Common.html#.downloadFile\">module:Common.downloadFile &rtrif; undefined</a>" }, { "title": "module:Common.extend", "link": "<a href=\"module-Common.html#.extend\">module:Common.extend &rtrif; undefined</a>" }, { "title": "module:Common.getFileSize", "link": "<a href=\"module-Common.html#.getFileSize\">module:Common.getFileSize &rtrif; undefined</a>" }, { "title": "module:Common.numberToPassword", "link": "<a href=\"module-Common.html#.numberToPassword\">module:Common.numberToPassword &rtrif; undefined</a>" }, { "title": "module:Common.random", "link": "<a href=\"module-Common.html#.random\">module:Common.random &rtrif; undefined</a>" }, { "title": "module:Common.removeSpecialChar", "link": "<a href=\"module-Common.html#.removeSpecialChar\">module:Common.removeSpecialChar &rtrif; undefined</a>" }, { "title": "module:Common.round", "link": "<a href=\"module-Common.html#.round\">module:Common.round &rtrif; undefined</a>" }, { "title": "module:Common.shuffle", "link": "<a href=\"module-Common.html#.shuffle\">module:Common.shuffle &rtrif; undefined</a>" }, { "title": "module:Common.validURL", "link": "<a href=\"module-Common.html#.validURL\">module:Common.validURL &rtrif; undefined</a>" }, { "title": "Datastore", "link": "<a href=\"module-Datastore.html\">Datastore</a>" }, { "title": "module:Datastore.model", "link": "<a href=\"module-Datastore.html#.model\">module:Datastore.model &rtrif; undefined</a>" }, { "title": "Fca", "link": "<a href=\"Util.module_Fca.html\">Fca</a>" }, { "title": "Util.module:Fca~getUsername", "link": "<a href=\"Util.module_Fca.html#~getUsername\">Util.module:Fca~getUsername &rtrif; undefined</a>" }, { "title": "Util.module:Fca~promisify", "link": "<a href=\"Util.module_Fca.html#~promisify\">Util.module:Fca~promisify &rtrif; undefined</a>" }, { "title": "Translate", "link": "<a href=\"Util.module_Translate.html\">Translate</a>" }, { "title": "Util.module:Translate~bing", "link": "<a href=\"Util.module_Translate.html#~bing\">Util.module:Translate~bing &rtrif; undefined</a>" }, { "title": "Util.module:Translate~bing", "link": "<a href=\"Util.module_Translate.html#~bing\">Util.module:Translate~bing &rtrif; undefined</a>" }, { "title": "Util.module:Translate~detect", "link": "<a href=\"Util.module_Translate.html#~detect\">Util.module:Translate~detect &rtrif; undefined</a>" }, { "title": "Command", "link": "<a href=\"Command.html\">Command</a>" }, { "title": "Command#add", "link": "<a href=\"Command.html#add\">Command &rtrif; add</a>" }, { "title": "Command#forEach", "link": "<a href=\"Command.html#forEach\">Command &rtrif; forEach</a>" }, { "title": "Command#load", "link": "<a href=\"Command.html#load\">Command &rtrif; load</a>" }, { "title": "Command#onCall", "link": "<a href=\"Command.html#onCall\">Command &rtrif; onCall</a>" }, { "title": "Command#recursiveFind", "link": "<a href=\"Command.html#recursiveFind\">Command &rtrif; recursiveFind</a>" }, { "title": "Manager", "link": "<a href=\"Manager.html\">Manager</a>" }, { "title": "Manager#clear", "link": "<a href=\"Manager.html#clear\">Manager &rtrif; clear</a>" }, { "title": "Manager#first", "link": "<a href=\"Manager.html#first\">Manager &rtrif; first</a>" }, { "title": "Manager#get", "link": "<a href=\"Manager.html#get\">Manager &rtrif; get</a>" }, { "title": "Manager#last", "link": "<a href=\"Manager.html#last\">Manager &rtrif; last</a>" }, { "title": "Manager#push", "link": "<a href=\"Manager.html#push\">Manager &rtrif; push</a>" }, { "title": "Manager#remove", "link": "<a href=\"Manager.html#remove\">Manager &rtrif; remove</a>" }, { "title": "Plugin", "link": "<a href=\"Plugin.html\">Plugin</a>" }, { "title": "Plugin#load", "link": "<a href=\"Plugin.html#load\">Plugin &rtrif; load</a>" }, { "title": "Plugin#onDisable", "link": "<a href=\"Plugin.html#onDisable\">Plugin &rtrif; onDisable</a>" }, { "title": "Plugin#onEnable", "link": "<a href=\"Plugin.html#onEnable\">Plugin &rtrif; onEnable</a>" }, { "title": "Plugin#setEnable", "link": "<a href=\"Plugin.html#setEnable\">Plugin &rtrif; setEnable</a>" }, { "title": "PluginManager", "link": "<a href=\"PluginManager.html\">PluginManager</a>" }, { "title": "PluginManager#add", "link": "<a href=\"PluginManager.html#add\">PluginManager &rtrif; add</a>" }, { "title": "PluginManager#getConfig", "link": "<a href=\"PluginManager.html#getConfig\">PluginManager &rtrif; getConfig</a>" }, { "title": "PluginManager#getUserdata", "link": "<a href=\"PluginManager.html#getUserdata\">PluginManager &rtrif; getUserdata</a>" }, { "title": "checkCredential", "link": "<a href=\"global.html#checkCredential\">checkCredential</a>" }, { "title": "CommandOptions", "link": "<a href=\"global.html#CommandOptions\">CommandOptions</a>" }, { "title": "convertAtpToAppstate", "link": "<a href=\"global.html#convertAtpToAppstate\">convertAtpToAppstate</a>" }, { "title": "convertJ2teamToAppstate", "link": "<a href=\"global.html#convertJ2teamToAppstate\">convertJ2teamToAppstate</a>" }, { "title": "facebook", "link": "<a href=\"global.html#facebook\">facebook</a>" }, { "title": "getCookieType", "link": "<a href=\"global.html#getCookieType\">getCookieType</a>" }, { "title": "isUsingCookie", "link": "<a href=\"global.html#isUsingCookie\">isUsingCookie</a>" }, { "title": "reply", "link": "<a href=\"global.html#reply\">reply</a>" }];
+    var options =
+        setupSearch(list, options)
 
-    
-
-    
-
-    
-
-    
-
-
-  </body>
+    </script>
+</body>
 
 </html>

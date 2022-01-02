@@ -4,7 +4,6 @@
 
 // this file just for init datastore, no need to instance in every action (insert, find ...)
 import {existsSync} from "fs"
-import {fileURLToPath} from "url"
 import {join, isAbsolute} from "path"
 import Joi from "joi"
 import nedb from "nedb-promises"
@@ -39,7 +38,7 @@ export function model(name, schema) {
 				const index = queue.findIndex(q => q[2] == resolve)
 				queue.splice(index, 1)
 				reject(new Error("Timeout query"))
-			}, 30000)
+			}, 5000)
 			queue.push([method, args, resolve, reject, timeout])
 			if (!isHandling) handleQueue()
 		})

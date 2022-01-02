@@ -31,7 +31,7 @@
 
 
     <title>
-      Global
+      Common
     </title>
 
     <!--[if lt IE 9]>
@@ -98,7 +98,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        Global
+        Common
       </h1>
       
 
@@ -110,13 +110,94 @@
 <section>
 
 
+<header>
+    
+        
+            
+        
+    
+</header>
+
 
 <article>
     <div class="container-overview">
     
         
+            <div class="description"><p>Common ultility functions<br></p></div>
+        
 
         
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_common.js.html">util/common.js</a>, <a href="util_common.js.html#line1">line 1</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -147,9 +228,9 @@
 
     
 
-    <h4 class="name" id="checkCredential">
-        <a href="#checkCredential">#</a>
-        <span class="type-signature"></span>checkCredential<span class="signature">(credential, apiOptions<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;object>}</span>
+    <h4 class="name" id=".asyncWait">
+        <a href="#.asyncWait">#</a>
+        <span class="type-signature">(async, static) </span>asyncWait<span class="signature">(time)</span><span class="type-signature"></span>
     </h4>
 
     
@@ -157,7 +238,7 @@
 
 
     <div class="description">
-        <p>Check credential is valid or not</p>
+        <p>Pause the program with promise wrapped</p>
     </div>
 
 
@@ -182,11 +263,7 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
-        
-        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -198,74 +275,23 @@
 
         <tr>
             
-                <td class="name"><code>credential</code></td>
+                <td class="name"><code>time</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">credential</span>
+<span class="param-type">Number</span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                </td>
-            
 
-            <td class="description last"><p>Validated credential for login</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>apiOptions</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">apiOptions</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    {}
-                
-                </td>
-            
-
-            <td class="description last"><p>See https://github.com/Schmavery/facebook-chat-api/blob/master/DOCS.md#apisetoptionsoptions</p></td>
+            <td class="description last"><p>Time to pause (milis)</p></td>
         </tr>
 
     
@@ -310,7 +336,208 @@
         <div class="details-item-container">
             <dt class="tag-source">Source:</dt>
             <dd class="tag-source"><ul class="dummy"><li>
-                <a href="deploy_facebook_login.js.html">deploy/facebook/login.js</a>, <a href="deploy_facebook_login.js.html#line78">line 78</a>
+                <a href="util_common.js.html">util/common.js</a>, <a href="util_common.js.html#line19">line 19</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Example</strong>
+        
+    <div class="rel">
+    <pre class="prettyprint"><code>console.log("We will log "amogus" after 5s")
+await asyncWait(5000)
+console.log("amogus")</code></pre>
+    
+    
+    </div>
+
+    </div>
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".constrain">
+        <a href="#.constrain">#</a>
+        <span class="type-signature">(static) </span>constrain<span class="signature">(value, left, right)</span><span class="type-signature"> &rarr; {Number}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Constrain a value in [left; right]</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The value</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>left</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Smallest value</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>right</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Biggest value</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_common.js.html">util/common.js</a>, <a href="util_common.js.html#line37">line 37</a>
             </li></ul></dd>
         </div>
     
@@ -341,7 +568,7 @@
         
             
 <div class="param-desc">
-    <p>An object contains fields uid: UID of fb acc, name: Name of fb acc, appState, api: facebook chat api</p>
+    <p>New value in [left; right]</p>
 </div>
 
 
@@ -352,7 +579,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;object></span>
+<span class="param-type">Number</span>
 
 
     </dd>
@@ -363,15 +590,27 @@
 
 
 
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Example</strong>
+        
+    <div class="rel">
+    <pre class="prettyprint"><code>constrain(5, 1, 10) // => 5
+constrain(-1, 1, 10) // => -1</code></pre>
+    
+    
+    </div>
+
+    </div>
+
 
         
             
 
     
 
-    <h4 class="name" id="convertAtpToAppstate">
-        <a href="#convertAtpToAppstate">#</a>
-        <span class="type-signature"></span>convertAtpToAppstate<span class="signature">(atp)</span><span class="type-signature"> &rarr; {string}</span>
+    <h4 class="name" id=".convert_to_string_time">
+        <a href="#.convert_to_string_time">#</a>
+        <span class="type-signature">(static) </span>convert_to_string_time<span class="signature">(time)</span><span class="type-signature"> &rarr; {string}</span>
     </h4>
 
     
@@ -379,7 +618,7 @@
 
 
     <div class="description">
-        <p>Convert cookie text from atp to appstate object</p>
+        <p>Convert milis to time string</p>
     </div>
 
 
@@ -416,13 +655,13 @@
 
         <tr>
             
-                <td class="name"><code>atp</code></td>
+                <td class="name"><code>time</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">Number</span>
 
 
             
@@ -432,7 +671,7 @@
 
             
 
-            <td class="description last"><p>ATP cookie text</p></td>
+            <td class="description last"><p>milis</p></td>
         </tr>
 
     
@@ -477,7 +716,7 @@
         <div class="details-item-container">
             <dt class="tag-source">Source:</dt>
             <dd class="tag-source"><ul class="dummy"><li>
-                <a href="deploy_facebook_login.js.html">deploy/facebook/login.js</a>, <a href="deploy_facebook_login.js.html#line130">line 130</a>
+                <a href="util_common.js.html">util/common.js</a>, <a href="util_common.js.html#line250">line 250</a>
             </li></ul></dd>
         </div>
     
@@ -508,7 +747,7 @@
         
             
 <div class="param-desc">
-    <p>Appstate object</p>
+    <p>timestring</p>
 </div>
 
 
@@ -530,24 +769,31 @@
 
 
 
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Example</strong>
+        
+    <div class="rel">
+    <pre class="prettyprint"><code>convert_to_string_time(123456) // => "2m 4s"</code></pre>
+    
+    
+    </div>
+
+    </div>
+
 
         
             
 
     
 
-    <h4 class="name" id="convertJ2teamToAppstate">
-        <a href="#convertJ2teamToAppstate">#</a>
-        <span class="type-signature"></span>convertJ2teamToAppstate<span class="signature">(j2teamCookieText)</span><span class="type-signature"> &rarr; {string}</span>
+    <h4 class="name" id=".currencyFormat">
+        <a href="#.currencyFormat">#</a>
+        <span class="type-signature">(static) </span>currencyFormat<span class="signature">(number)</span><span class="type-signature"> &rarr; {String}</span>
     </h4>
 
     
 
 
-
-    <div class="description">
-        <p>convert cookie text from j2team to appstate object</p>
-    </div>
 
 
 
@@ -583,13 +829,16 @@
 
         <tr>
             
-                <td class="name"><code>j2teamCookieText</code></td>
+                <td class="name"><code>number</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Number</span>
 
 
             
@@ -599,7 +848,7 @@
 
             
 
-            <td class="description last"><p>J2team cookie text</p></td>
+            <td class="description last"><p>Format 1 string, number as VNĐ currency</p></td>
         </tr>
 
     
@@ -644,7 +893,7 @@
         <div class="details-item-container">
             <dt class="tag-source">Source:</dt>
             <dd class="tag-source"><ul class="dummy"><li>
-                <a href="deploy_facebook_login.js.html">deploy/facebook/login.js</a>, <a href="deploy_facebook_login.js.html#line109">line 109</a>
+                <a href="util_common.js.html">util/common.js</a>, <a href="util_common.js.html#line144">line 144</a>
             </li></ul></dd>
         </div>
     
@@ -675,7 +924,7 @@
         
             
 <div class="param-desc">
-    <p>Appstate object</p>
+    <p>VNĐ Currency</p>
 </div>
 
 
@@ -686,7 +935,7 @@
     </dt>
     <dd>
         
-<span class="param-type">string</span>
+<span class="param-type">String</span>
 
 
     </dd>
@@ -697,15 +946,26 @@
 
 
 
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Example</strong>
+        
+    <div class="rel">
+    <pre class="prettyprint"><code>currencyFormat(1234567) // => "1,234,567"</code></pre>
+    
+    
+    </div>
+
+    </div>
+
 
         
             
 
     
 
-    <h4 class="name" id="facebook">
-        <a href="#facebook">#</a>
-        <span class="type-signature"></span>facebook<span class="signature">(credential, options)</span><span class="type-signature"> &rarr; {Promise}</span>
+    <h4 class="name" id=".deepEqual">
+        <a href="#.deepEqual">#</a>
+        <span class="type-signature">(static) </span>deepEqual<span class="signature">(x, y)</span><span class="type-signature"> &rarr; {boolean}</span>
     </h4>
 
     
@@ -713,7 +973,7 @@
 
 
     <div class="description">
-        <p>Bootstrap login (add hook -&gt; listener, create api, catch error, ...)</p>
+        <p>Compare two object in recursive</p>
     </div>
 
 
@@ -750,13 +1010,13 @@
 
         <tr>
             
-                <td class="name"><code>credential</code></td>
+                <td class="name"><code>x</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">credential</span>
+<span class="param-type">object</span>
 
 
             
@@ -766,20 +1026,20 @@
 
             
 
-            <td class="description last"><p>See type definition in &quot;./login.js&quot;</p></td>
+            <td class="description last"><p>First object</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>options</code></td>
+                <td class="name"><code>y</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">apiOptions</span>
+<span class="param-type">object</span>
 
 
             
@@ -789,7 +1049,7 @@
 
             
 
-            <td class="description last"><p>See type definition in &quot;./login.js&quot;</p></td>
+            <td class="description last"><p>Second object</p></td>
         </tr>
 
     
@@ -834,7 +1094,7 @@
         <div class="details-item-container">
             <dt class="tag-source">Source:</dt>
             <dd class="tag-source"><ul class="dummy"><li>
-                <a href="deploy_facebook_index.js.html">deploy/facebook/index.js</a>, <a href="deploy_facebook_index.js.html#line23">line 23</a>
+                <a href="util_common.js.html">util/common.js</a>, <a href="util_common.js.html#line271">line 271</a>
             </li></ul></dd>
         </div>
     
@@ -865,7 +1125,7 @@
         
             
 <div class="param-desc">
-    <p>result from import(&quot;./login.js&quot;).default(credential, apiOptions)</p>
+    <p>Is equal or not</p>
 </div>
 
 
@@ -876,7 +1136,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Promise</span>
+<span class="param-type">boolean</span>
 
 
     </dd>
@@ -887,15 +1147,28 @@
 
 
 
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Example</strong>
+        
+    <div class="rel">
+    <pre class="prettyprint"><code>const a = {level1: {hello: "world"}}
+const b = {level1: {hello: "world"}}
+deepEqual(a, b) // => true</code></pre>
+    
+    
+    </div>
+
+    </div>
+
 
         
             
 
     
 
-    <h4 class="name" id="getCookieType">
-        <a href="#getCookieType">#</a>
-        <span class="type-signature"></span>getCookieType<span class="signature">(cookieText)</span><span class="type-signature"> &rarr; {string}</span>
+    <h4 class="name" id=".downloadFile">
+        <a href="#.downloadFile">#</a>
+        <span class="type-signature">(async, static) </span>downloadFile<span class="signature">(url, path)</span><span class="type-signature"></span>
     </h4>
 
     
@@ -903,7 +1176,7 @@
 
 
     <div class="description">
-        <p>Get type of cookie</p>
+        <p>Download a file to a path</p>
     </div>
 
 
@@ -940,7 +1213,7 @@
 
         <tr>
             
-                <td class="name"><code>cookieText</code></td>
+                <td class="name"><code>url</code></td>
             
 
             <td class="type">
@@ -956,7 +1229,30 @@
 
             
 
-            <td class="description last"><p>String representing cookie</p></td>
+            <td class="description last"><p>URL download</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Path file</p></td>
         </tr>
 
     
@@ -1001,7 +1297,172 @@
         <div class="details-item-container">
             <dt class="tag-source">Source:</dt>
             <dd class="tag-source"><ul class="dummy"><li>
-                <a href="deploy_facebook_login.js.html">deploy/facebook/login.js</a>, <a href="deploy_facebook_login.js.html#line51">line 51</a>
+                <a href="util_common.js.html">util/common.js</a>, <a href="util_common.js.html#line233">line 233</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".extend">
+        <a href="#.extend">#</a>
+        <span class="type-signature">(static) </span>extend<span class="signature">(object, deep)</span><span class="type-signature"> &rarr; {Object}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Deep extend</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>object</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Parent object</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>deep</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Inherit object</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_common.js.html">util/common.js</a>, <a href="util_common.js.html#line72">line 72</a>
             </li></ul></dd>
         </div>
     
@@ -1032,7 +1493,7 @@
         
             
 <div class="param-desc">
-    <p>Type of cookie (atp, j2team, appstate)</p>
+    <p>Inherited object</p>
 </div>
 
 
@@ -1043,7 +1504,7 @@
     </dt>
     <dd>
         
-<span class="param-type">string</span>
+<span class="param-type">Object</span>
 
 
     </dd>
@@ -1054,15 +1515,37 @@
 
 
 
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Example</strong>
+        
+    <div class="rel">
+    <pre class="prettyprint"><code>const obj1 = {
+ a: {
+   b: true
+ }
+};
+const obj2 = {
+ a: {
+   c: "kb2abot"
+ }
+}
+extend(a, b);
+// { a: { b: "kb2abot", c: true } }</code></pre>
+    
+    
+    </div>
+
+    </div>
+
 
         
             
 
     
 
-    <h4 class="name" id="isUsingCookie">
-        <a href="#isUsingCookie">#</a>
-        <span class="type-signature"></span>isUsingCookie<span class="signature">(credential)</span><span class="type-signature"> &rarr; {Boolean}</span>
+    <h4 class="name" id=".getFileSize">
+        <a href="#.getFileSize">#</a>
+        <span class="type-signature">(static) </span>getFileSize<span class="signature">(path)</span><span class="type-signature"> &rarr; {Number}</span>
     </h4>
 
     
@@ -1070,7 +1553,7 @@
 
 
     <div class="description">
-        <p>Check credential is login via cookie or email/pwd</p>
+        <p>Calculate the size of the file (in MB)</p>
     </div>
 
 
@@ -1107,13 +1590,13 @@
 
         <tr>
             
-                <td class="name"><code>credential</code></td>
+                <td class="name"><code>path</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">credential</span>
+<span class="param-type">String</span>
 
 
             
@@ -1123,7 +1606,7 @@
 
             
 
-            <td class="description last"><p>Credential for login</p></td>
+            <td class="description last"><p>The path to the file</p></td>
         </tr>
 
     
@@ -1168,7 +1651,7 @@
         <div class="details-item-container">
             <dt class="tag-source">Source:</dt>
             <dd class="tag-source"><ul class="dummy"><li>
-                <a href="deploy_facebook_login.js.html">deploy/facebook/login.js</a>, <a href="deploy_facebook_login.js.html#line160">line 160</a>
+                <a href="util_common.js.html">util/common.js</a>, <a href="util_common.js.html#line113">line 113</a>
             </li></ul></dd>
         </div>
     
@@ -1198,6 +1681,10 @@
     <strong>Returns:</strong>
         
             
+<div class="param-desc">
+    <p>File size (MB)</p>
+</div>
+
 
 
 <dl class="param-type">
@@ -1206,7 +1693,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Boolean</span>
+<span class="param-type">Number</span>
 
 
     </dd>
@@ -1217,15 +1704,27 @@
 
 
 
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Example</strong>
+        
+    <div class="rel">
+    <pre class="prettyprint"><code>// Example with 1024KB test.txt file
+getFileSize(__dirname + "/test.txt") // => 1</code></pre>
+    
+    
+    </div>
+
+    </div>
+
 
         
             
 
     
 
-    <h4 class="name" id="reply">
-        <a href="#reply">#</a>
-        <span class="type-signature"></span>reply<span class="signature">(text, threadID<span class="signature-attributes">opt</span>, messageID<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span>
+    <h4 class="name" id=".numberToPassword">
+        <a href="#.numberToPassword">#</a>
+        <span class="type-signature">(static) </span>numberToPassword<span class="signature">(number)</span><span class="type-signature"> &rarr; {String}</span>
     </h4>
 
     
@@ -1233,7 +1732,7 @@
 
 
     <div class="description">
-        <p>Reply to a thread &amp; messageID (this is facebook form, for now)</p>
+        <p>Convert a number to a special code (according to the English alphabet)</p>
     </div>
 
 
@@ -1258,11 +1757,302 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
         
-        <th>Default</th>
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>number</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Number you want to transfer</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_common.js.html">util/common.js</a>, <a href="util_common.js.html#line128">line 128</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+<div class="param-desc">
+    <p>Special code 1 = &quot;o&quot;, 2 = &quot;t&quot;,...</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Example</strong>
+        
+    <div class="rel">
+    <pre class="prettyprint"><code>numbersToWords(123) // => "oth"
+numbersToWords(18102004) // => "ogoztzzf"</code></pre>
+    
+    
+    </div>
+
+    </div>
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".random">
+        <a href="#.random">#</a>
+        <span class="type-signature">(static) </span>random<span class="signature">()</span><span class="type-signature"></span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Get random value from [start; end]</p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_common.js.html">util/common.js</a>, <a href="util_common.js.html#line177">line 177</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Examples</strong>
+        
+    <div class="rel">
+    <pre class="prettyprint"><code>import { random } from "kb2abot/util/common.js";
+
+random(1, 10) // maybe 3.141592658...
+// returns a random value from 1 to 10
+
+// note: Since this random is not rounded so you should use random with round</code></pre>
+    
+    
+    </div>
+
+    <div class="rel">
+    <pre class="prettyprint"><code>import { random, round } from "kb2abot/util/common.js";
+
+round(random(1, 10), 2) // => maybe 3.14
+// Returns a random value from 1 to 10 and is rounded to the second decimal</code></pre>
+    
+    
+    </div>
+
+    </div>
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".removeSpecialChar">
+        <a href="#.removeSpecialChar">#</a>
+        <span class="type-signature">(static) </span>removeSpecialChar<span class="signature">(text)</span><span class="type-signature"> &rarr; {String}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Remove strange characters in text</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
         
 
         <th class="last">Description</th>
@@ -1280,110 +2070,17 @@
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">String</span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                </td>
-            
 
-            <td class="description last"><p>The message you want to send</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>threadID</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-|
-
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    message.threadID
-                
-                </td>
-            
-
-            <td class="description last"><p>threadID</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>messageID</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    message.messageID
-                
-                </td>
-            
-
-            <td class="description last"><p>messageID you want to reply</p></td>
+            <td class="description last"><p>Some text</p></td>
         </tr>
 
     
@@ -1428,7 +2125,7 @@
         <div class="details-item-container">
             <dt class="tag-source">Source:</dt>
             <dd class="tag-source"><ul class="dummy"><li>
-                <a href="deploy_facebook_hook.js.html">deploy/facebook/hook.js</a>, <a href="deploy_facebook_hook.js.html#line10">line 10</a>
+                <a href="util_common.js.html">util/common.js</a>, <a href="util_common.js.html#line153">line 153</a>
             </li></ul></dd>
         </div>
     
@@ -1459,7 +2156,7 @@
         
             
 <div class="param-desc">
-    <p>If error, return error</p>
+    <p>Clean text</p>
 </div>
 
 
@@ -1470,7 +2167,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Promise</span>
+<span class="param-type">String</span>
 
 
     </dd>
@@ -1483,37 +2180,21 @@
 
 
         
-    
+            
 
     
-        <h3 class="subsection-title">Type Definitions</h3>
 
-        
-                
-<h4 class="name" id="CommandOptions">
-    <a href="#CommandOptions">#</a>
-    CommandOptions
-</h4>
+    <h4 class="name" id=".round">
+        <a href="#.round">#</a>
+        <span class="type-signature">(static) </span>round<span class="signature">(number, amount)</span><span class="type-signature"> &rarr; {Number}</span>
+    </h4>
 
+    
 
 
 
-<div class="description">
-    <p>Command options to use to pass through Command constructor</p>
-</div>
-
-
-
-    <div class="member-item-container flex">
-        <strong>Type: </strong>
-        <ul>
-            <li>
-                
-<span class="param-type">object</span>
-
-
-            </li>
-        </ul>
+    <div class="description">
+        <p>Round the digit to a certain decimal place</p>
     </div>
 
 
@@ -1521,11 +2202,14 @@
 
 
 
-    <h5 class="subsection-title">Properties</h5>
 
-    
-<div class="allow-overflow">
-<table class="props">
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
     <thead>
     <tr>
         
@@ -1535,11 +2219,7 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
-        
-        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -1551,111 +2231,55 @@
 
         <tr>
             
-                <td class="name"><code>plugin</code></td>
+                <td class="name"><code>number</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="Plugin.html">Plugin</a></span>
+<span class="param-type">Number</span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                </td>
-            
 
-            <td class="description last"><p>Plugin instance</p></td>
+            <td class="description last"><p>The digit</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>parentCmd</code></td>
+                <td class="name"><code>amount</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">Number</span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                </td>
-            
 
-            <td class="description last"><p>Internal variable to use to create recursive commands inside commands so you don't need to pass this</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>isPrimary</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last"><p>To distinguish, primary commands hold non-primary commands so each plugin should have only 1 primary command</p></td>
+            <td class="description last"><p>Decimal place</p></td>
         </tr>
 
     
     </tbody>
 </table>
-</div>
+
+    </div>
+
+
 
 
 
@@ -1691,7 +2315,7 @@
         <div class="details-item-container">
             <dt class="tag-source">Source:</dt>
             <dd class="tag-source"><ul class="dummy"><li>
-                <a href="Command.js.html">Command.js</a>, <a href="Command.js.html#line4">line 4</a>
+                <a href="util_common.js.html">util/common.js</a>, <a href="util_common.js.html#line49">line 49</a>
             </li></ul></dd>
         </div>
     
@@ -1710,7 +2334,413 @@
 
 
 
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
             
+<div class="param-desc">
+    <p>Rounded digit</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Number</span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Example</strong>
+        
+    <div class="rel">
+    <pre class="prettyprint"><code>round(Math.PI, 2); // => 3.14</code></pre>
+    
+    
+    </div>
+
+    </div>
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".shuffle">
+        <a href="#.shuffle">#</a>
+        <span class="type-signature">(static) </span>shuffle<span class="signature">(arr)</span><span class="type-signature"> &rarr; {Array}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Shuffle the array</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>arr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array to be shuffled</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_common.js.html">util/common.js</a>, <a href="util_common.js.html#line190">line 190</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+<div class="param-desc">
+    <p>Shuffled array</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Example</strong>
+        
+    <div class="rel">
+    <pre class="prettyprint"><code>const arr = [1, 2, 3, 4]
+shuffle(arr) // => [2, 3, 1, 4]
+console.log(arr) => [2, 3, 1, 4]</code></pre>
+    
+    
+    </div>
+
+    </div>
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".validURL">
+        <a href="#.validURL">#</a>
+        <span class="type-signature">(static) </span>validURL<span class="signature">(url)</span><span class="type-signature"> &rarr; {boolean}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Verify a https url is valid or not</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Https url</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_common.js.html">util/common.js</a>, <a href="util_common.js.html#line214">line 214</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+<div class="param-desc">
+    <p>Valid or not</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Example</strong>
+        
+    <div class="rel">
+    <pre class="prettyprint"><code>validURL("https://www.facebook.com/") // => true</code></pre>
+    
+    
+    </div>
+
+    </div>
+
+
+        
+    
+
     
 
     
