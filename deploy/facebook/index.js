@@ -1,5 +1,5 @@
-import login from "./login"
-import hook from "./hook"
+import login from "./login.js"
+import hook from "./hook.js"
 
 //                         _ooOoo_
 //                        o8888888o
@@ -37,7 +37,8 @@ export default async (credential, options) => {
 	} = options
 	const client = await login(credential, apiOptions)
 	const hooker = externalHook || hook
-	for (const plugin of pluginManager) if (plugin.isInternal) plugin.pluginManager = pluginManager
+	for (const plugin of pluginManager)
+		if (plugin.isInternal) plugin.pluginManager = pluginManager
 	client.api.listenMqtt(async (err, message) => {
 		try {
 			const result = await hooker.bind({

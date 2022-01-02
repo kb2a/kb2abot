@@ -1,5 +1,5 @@
 import NodeCache from "node-cache"
-import Command from "./Command"
+import Command from "./Command.js"
 
 /** Class representing a Plugin */
 class Plugin {

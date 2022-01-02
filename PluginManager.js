@@ -1,10 +1,10 @@
 import {join} from "path"
-import {existsSync, readFileSync, writeFileSync} from "fs"
 import {fileURLToPath} from "url"
-import Manager from "./util/Manager"
-import getCallerFile from "get-caller-file"
-import deepExtend from "deep-extend"
+import {existsSync, readFileSync, writeFileSync} from "fs"
 import YAML from "yaml"
+import deepExtend from "deep-extend"
+import getCallerFile from "get-caller-file"
+import Manager from "./util/Manager.js"
 
 /** Class representing a PluginManager - A Manager for plugins */
 class PluginManager extends Manager {
@@ -13,13 +13,12 @@ class PluginManager extends Manager {
 	 * @param  {string}    configDir    The config directory* (*: if use relative path, it won't use process.cwd() to join, it use your current __dirname or import.meta.url)
 	 * @param  {string}    userdataDir  The userdata directory*
 	 */
-	constructor(configDir, userdataDir, options = {}) {
+	constructor(configDir, userdataDir) {
 		super(configDir)
 		/** Make sure this class is not created by js built-in function like .map, .filter, ...  */
 		if (!this.isManager) return
 		this.configDir = fileURLToPath(join(getCallerFile(), "..", configDir))
 		this.userdataDir = fileURLToPath(join(getCallerFile(), "..", userdataDir))
-		this.options = options
 		if (!existsSync(this.configDir) || !existsSync(this.userdataDir)) {
 			console.log(this.configDir, this.userdataDir)
 			throw new Error("Config or userdata directory is not exists!")

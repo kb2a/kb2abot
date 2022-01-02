@@ -1,5 +1,5 @@
 import NodeCache from "node-cache"
-import Manager from "./util/Manager"
+import Manager from "./util/Manager.js"
 
 /**
  * Command options to use to pass through Command constructor

@@ -9,7 +9,6 @@ import {join, isAbsolute} from "path"
 import Joi from "joi"
 import nedb from "nedb-promises"
 import pluralize from "pluralize"
-import getCallerFile from "get-caller-file"
 
 let directory = null
 const Models = {}
@@ -125,7 +124,7 @@ export function model(name, schema) {
 }
 
 export async function init(dir) {
-	if (!isAbsolute(dir)) dir = fileURLToPath(join(getCallerFile(), "..", dir))
+	if (!isAbsolute(dir)) dir = join(process.cwd(), dir)
 	if (!existsSync(dir)) throw new Error(`Dir not found: ${dir}`)
 	directory = dir
 	const jobs = []

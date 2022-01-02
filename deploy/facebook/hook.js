@@ -1,6 +1,6 @@
 import stringSimilarity from "string-similarity"
-// import {google, detect} from "../../util/translate"
-import Thread from "./models/Thread"
+import Thread from "./models/Thread.js"
+// import {google, detect} from "../../util/translate.js"
 
 export default async function hook(err, message) {
 	const {config, api, pluginManager} = this
