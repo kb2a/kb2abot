@@ -85,7 +85,7 @@ And we add that **plugin** to a **plugin manager**
 ```js
 import {PluginManager} from "kb2abot"
 const configDirectory = "./config"
-const userdataDirectory = "./userdata" // relative to process.cwd() or absolute path
+const userdataDirectory = "./userdata" // relative to cwd
 const pluginManager = new PluginManager(configDirectory, userdataDirectory)
 await pluginManager.add(myPlugin)
 ```
@@ -94,7 +94,7 @@ Finally, now we add  **pluginManager** to hook function:
 import {Deploy, Datastore} from "kb2abot"
 import {readHJSON} from "kb2abot/util/common"
 Datastore.init("./datastores") // If you dont init datastore, your bot will be freeze and throw timeout error
-const botOptions = readHJSON("./bot.hjson")
+const botOptions = readHJSON("./bot.hjson") // Read and parse bot.hjson file (relative to cwd)
 ```
 **botOptions** is the options of your bot (see the example template at [example-bot.hjson](https://github.com/kb2ateam/kb2abot-bootloader/blob/npm-based-plugin/bots/example-bot.hjson)
 ```js

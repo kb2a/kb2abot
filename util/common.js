@@ -6,6 +6,7 @@
 import fs from "fs"
 import path from "path"
 import fetch from "node-fetch"
+import HJSON from "hjson"
 
 /**
  * 
@@ -298,4 +299,13 @@ export function deepEqual(x, y) {
 export function readJSON(thePath) {
 	const text = fs.readFileSync(path.resolve(process.cwd(), thePath)).toString()
 	return text ? JSON.parse(text) : {}
+}
+
+/**
+ * Read and parse a hjson file
+ * @param  {string} thePath Path to .hjson file
+ * @return {object}         Parsed hjson text
+ */
+export function readHJSON(thePath) {
+	return HJSON.parse(fs.readFileSync(thePath).toString())
 }
