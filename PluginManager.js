@@ -1,8 +1,8 @@
-import {join} from "path"
-import {fileURLToPath} from "url"
-import {existsSync, readFileSync, writeFileSync} from "fs"
-import YAML from "yaml"
+import fs from "fs"
+import path from "path"
+import safeStringify from "fast-safe-stringify"
 import Manager from "./util/Manager.js"
+import { readJSON } from "./util/common.js"
 
 /** Class representing a PluginManager - A Manager for plugins */
 class PluginManager extends Manager {
@@ -15,42 +15,42 @@ class PluginManager extends Manager {
 		super(configDir)
 		/** Make sure this class is not created by js built-in function like .map, .filter, ...  */
 		if (!this.isManager) return
-		this.configDir = join(process.cwd(), configDir)
-		this.userdataDir = join(process.cwd(), userdataDir)
-		if (!existsSync(this.configDir) || !existsSync(this.userdataDir)) {
-			console.log(this.configDir, this.userdataDir)
-			throw new Error("Config or userdata directory is not exists!")
+		this.configDir = path.join(process.cwd(), configDir)
+		this.userdataDir = path.join(process.cwd(), userdataDir)
+		if (!fs.existsSync(this.configDir) || !fs.existsSync(this.userdataDir))
+			throw new Error(`Config or userdata directory is not exists: (${this.configDir}, ${this.userdataDir})`)
+	}
+
+	datastorePaths(plugin) {
+		return {
+			config: path.join(this.configDir, `${plugin.package.name}@${plugin.package.author}.config.json`),
+			userdata: path.join(this.userdataDir, `${plugin.package.name}@${plugin.package.author}.userdata.json`)
 		}
 	}
 
 	/**
-	 * Get plugin's configuration search in this.configDir
+	 * Get plugin's configuration and userdata search in this.configDir and this.userdataDir
 	 * @param  {Plugin}  plugin  Instance of class Plugin
-	 * @return {object}  The plugin's config
+	 * @return {object}  The plugin's config and userdata
 	 */
-	getConfig(plugin) {
-		const file = `${plugin.package.name}@${plugin.package.author}.config.yaml`
-		const configPath = join(this.configDir, file)
-		if (!existsSync(configPath)) {
-			writeFileSync(configPath, "")
-			return {}
+	readDatastore(plugin) {
+		const paths = this.datastorePaths(plugin)
+		return {
+			config: fs.existsSync(paths.config) ? readJSON(paths.config) : {},
+			userdata: fs.existsSync(paths.userdata) ? readJSON(paths.userdata) : {}
 		}
-		return YAML.parse(readFileSync(configPath).toString()) || {}
 	}
 
 	/**
-	 * Get plugin's userdata search in this.userdataDir, userdata is more like datastore for plugin
-	 * @param  {Plugin}    plugin  [description]
-	 * @return {object}    Userdata
+	 * Save plugin config to local file
 	 */
-	getUserdata(plugin) {
-		const file = `${plugin.package.name}@${plugin.package.author}.userdata.yaml`
-		const userdataPath = join(this.userdataDir, file)
-		if (!existsSync(userdataPath)) {
-			writeFileSync(userdataPath, "")
-			return {}
-		}
-		return YAML.parse(readFileSync(userdataPath).toString()) || {}
+	saveDatastore(plugin) {
+		const paths = this.datastorePaths(plugin)
+		const {config, userdata} = plugin.preSaveDatastore(plugin.config, plugin.userdata)
+		// Remove the circular structure
+		const replacer = (key, value) => value === "[Circular]" ? undefined : value
+		fs.writeFileSync(paths.config, safeStringify(config, replacer, "\t"))
+		fs.writeFileSync(paths.userdata, safeStringify(userdata, replacer, "\t"))
 	}
 
 	/**
@@ -74,8 +74,11 @@ class PluginManager extends Manager {
 			})
 		)
 		for (const plugin of plugins) {
-			plugin.config = plugin.configTemplate(this.getConfig(plugin))
-			plugin.userdata = plugin.userdataTemplate(this.getUserdata(plugin))
+			const {config: rawConfig, userdata: rawUserdata} = this.readDatastore(plugin)
+			const {config, userdata} = plugin.handleDatastore(rawConfig, rawUserdata)
+			plugin.config = config
+			plugin.userdata = userdata
+			this.saveDatastore(plugin)
 		}
 		this.push(...plugins)
 	}

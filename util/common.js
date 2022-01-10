@@ -4,6 +4,7 @@
  */
 
 import fs from "fs"
+import path from "path"
 import fetch from "node-fetch"
 
 /**
@@ -287,4 +288,14 @@ export function deepEqual(x, y) {
 
 		return true
 	} else return false
+}
+
+/**
+ * Read and parse a json file
+ * @param  {string} thePath Path to .json file
+ * @return {object}         Parsed json text
+ */
+export function readJSON(thePath) {
+	const text = fs.readFileSync(path.resolve(process.cwd(), thePath)).toString()
+	return text ? JSON.parse(text) : {}
 }

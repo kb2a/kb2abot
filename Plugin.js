@@ -23,6 +23,26 @@ class Plugin {
 	}
 
 	/**
+	 * Handle raw datastore has recently read from local file, return new datastore by you want
+	 * @param  {object} rawConfig   Raw config before assign to plugin (plugin.config = ...)
+	 * @param  {object} rawUserdata Raw userdata before assign to plugin (plugin.userdata = ...)
+	 * @return {{config: object, userdata: object}} New datastore after handle
+	 */
+	handleDatastore(rawConfig, rawUserdata) {
+		return {config: rawConfig, userdata: rawUserdata}
+	}
+
+	/**
+	 * Pre save raw datastore recently modified from runtime, return new datastore by you want
+	 * @param  {object} rawConfig   Raw config (Note: This variable is candy code and reference to this.config)
+	 * @param  {object} rawUserdata Raw userdata (Note: This variable is candy code and reference to this.userdata)
+	 * @return {{config: object, userdata: object}} New datastore
+	 */
+	preSaveDatastore(rawConfig, rawUserdata) {
+		return {config: rawConfig, userdata: rawUserdata}
+	}
+
+	/**
 	 * Returns a value indicating whether or not this plugin is currently enabled
 	 * @readonly
 	 * @type {boolean}
