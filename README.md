@@ -1,17 +1,17 @@
+
 <h1 align="center">
 	<a href="#"><img src="https://i.imgur.com/u6eJA84.png" alt="kb2abot"></a>
 </h1>
 <p align="center">
 	<img alt="size" src="https://img.shields.io/github/repo-size/kb2ateam/kb2abot-core.svg?style=flat-square&label=size">
 	<img alt="code-version" src="https://img.shields.io/badge/dynamic/json?color=red&label=code%20version&prefix=v&query=%24.version&url=https://raw.githubusercontent.com/kb2ateam/kb2abot/main/package.json&style=flat-square">
-	<a href="https://github.com/kb2ateam/kb2abot/commits"><img alt="commits" src="https://img.shields.io/github/commit-activity/m/kb2ateam/kb2abot.svg?label=commit&style=flat-square"></a>
+	<img alt="visitors" src="https://visitor-badge.laobi.icu/badge?page_id=kb2ateam.kb2abot-core" />
 	<a href="https://www.codefactor.io/repository/github/kb2ateam/kb2abot"><img src="https://www.codefactor.io/repository/github/kb2ateam/kb2abot/badge" alt="CodeFactor" /></a>
 </p>
 
 ## About
 
-kb2abot is a powerful [Node.js](https://nodejs.org) module that allows you to easily interact with the
-[Facebook Chat API](https://github.com/Schmavery/facebook-chat-api) and more!
+kb2abot is a powerful [Node.js](https://nodejs.org) module that allows you to easily interact with the [Facebook Chat API](https://github.com/Schmavery/facebook-chat-api) and more!
 
 - Object-oriented
 - Performant
@@ -61,15 +61,11 @@ Afterwards we add that **command** to a **plugin**:
 import {readFileSync} from "fs"
 import {resolve} from "url"
 import {Plugin} from "kb2abot"
-import configTemplate from "./template/config"
-import userdataTemplate from "./template/userdata"
 
 class MyPlugin extends Plugin {
 	package = JSON.parse(
 		readFileSync(new URL(resolve(import.meta.url, "package.json")))
 	);
-	configTemplate = configTemplate;
-	userdataTemplate = userdataTemplate;
 
 	// Called after this plugin is constructored (you would wrap your "async this.commands.add(command)" in this function in order to load commands in synchronous)
 	async load() {
@@ -88,18 +84,19 @@ const myPlugin = new MyPlugin()
 And we add that **plugin** to a **plugin manager**
 ```js
 import {PluginManager} from "kb2abot"
-const configDirectory = "./someconf" // Store the plugin's configs (use relative path to your current file, not process.cwd())
-const userdataDirectory = "./somedata" // Store the plugin's userdata (use relative path to your current file, not process.cwd())
+const configDirectory = "./config"
+const userdataDirectory = "./userdata" // relative to process.cwd() or absolute path
 const pluginManager = new PluginManager(configDirectory, userdataDirectory)
 await pluginManager.add(myPlugin)
 ```
-Finally, now we going to add  **pluginManager** to hook function:
+Finally, now we add  **pluginManager** to hook function:
 ```js
 import {Deploy, Datastore} from "kb2abot"
+import {readHJSON} from "kb2abot/util/common"
 Datastore.init("./datastores") // If you dont init datastore, your bot will be freeze and throw timeout error
-const botOptions = (await import("./bot.js")).default
+const botOptions = readHJSON("./bot.hjson")
 ```
-**botOptions** is the options of your bot (see the example template at [example-bot.js](https://github.com/kb2ateam/kb2abot-bootloader/bots/example-bot.js))
+**botOptions** is the options of your bot (see the example template at [example-bot.hjson](https://github.com/kb2ateam/kb2abot-bootloader/blob/npm-based-plugin/bots/example-bot.hjson)
 ```js
 const client = await Deploy.facebook(botOptions.credential, {
 	apiOptions: botOptions.fcaOptions,
@@ -119,4 +116,4 @@ See [the contribution guide](https://github.com/kb2ateam/kb2abot/blob/main/.gith
 
 ## Help
 
-If you don't understand something in the documentation, you are experiencing problems, or you just need a gentle nudge in the right direction, please don't hesitate to join our community [KB2A Community](https://discord.gg/djs).
+If you don't understand something in the documentation, you are experiencing problems, or you just need a gentle nudge in the right direction, please don't hesitate to join our community [KB2A Community](https://www.facebook.com/groups/KB2A.Team/).
