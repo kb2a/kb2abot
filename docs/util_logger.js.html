@@ -31,7 +31,7 @@
 
 
     <title>
-      Plugin
+      util/logger.js
     </title>
 
     <!--[if lt IE 9]>
@@ -98,7 +98,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        Plugin
+        util/logger.js
       </h1>
       
 
@@ -106,1154 +106,129 @@
 
 
 
-
-<section>
-
-
-<header>
-    
-        
-        <h2>
-        
-        Plugin
-        
-        </h2>
-        
-        
-            <div class="class-description"><p>Class representing a Plugin</p></div>
-        
-    
-</header>
-
-
-<article>
-    <div class="container-overview">
-    
-        
-
-    
-        <h2>Constructor</h2>
-    
-
-    <h4 class="name" id="Plugin">
-        <a href="#Plugin">#</a>
-        <span class="type-signature"></span>new Plugin<span class="signature">()</span><span class="type-signature"></span>
-    </h4>
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source"><ul class="dummy"><li>
-                <a href="Plugin.js.html">Plugin.js</a>, <a href="Plugin.js.html#line5">line 5</a>
-            </li></ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-        <h3 class="subsection-title">Members</h3>
-
-        
-            
-<h4 class="name" id="commands">
-    <a href="#commands">#</a>
-    <span class="type-signature"></span>commands<span class="type-signature"></span>
-</h4>
-
-
-
-
-<div class="description">
-    <p>create primary command that holds commands</p>
-</div>
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source"><ul class="dummy"><li>
-                <a href="Plugin.js.html">Plugin.js</a>, <a href="Plugin.js.html#line7">line 7</a>
-            </li></ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="isEnabled">
-    <a href="#isEnabled">#</a>
-    <span class="type-signature">(readonly) </span>isEnabled<span class="type-signature"> :boolean</span>
-</h4>
-
-
-
-
-<div class="description">
-    <p>Returns a value indicating whether or not this plugin is currently enabled</p>
-</div>
-
-
-
-    <div class="member-item-container flex">
-        <strong>Type: </strong>
-        <ul>
-            <li>
-                
-<span class="param-type">boolean</span>
-
-
-            </li>
-        </ul>
-    </div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source"><ul class="dummy"><li>
-                <a href="Plugin.js.html">Plugin.js</a>, <a href="Plugin.js.html#line50">line 50</a>
-            </li></ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="isInternal">
-    <a href="#isInternal">#</a>
-    <span class="type-signature">(readonly) </span>isInternal<span class="type-signature"> :boolean</span>
-</h4>
-
-
-
-
-<div class="description">
-    <p>Check plugin is internal or not (Internal plugin will have field &quot;plugins&quot; which can access to all plugins)</p>
-</div>
-
-
-
-    <div class="member-item-container flex">
-        <strong>Type: </strong>
-        <ul>
-            <li>
-                
-<span class="param-type">boolean</span>
-
-
-            </li>
-        </ul>
-    </div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source"><ul class="dummy"><li>
-                <a href="Plugin.js.html">Plugin.js</a>, <a href="Plugin.js.html#line59">line 59</a>
-            </li></ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-        
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id="handleDatastore">
-        <a href="#handleDatastore">#</a>
-        <span class="type-signature"></span>handleDatastore<span class="signature">(rawConfig, rawUserdata)</span><span class="type-signature"> &rarr; {Object}</span>
-    </h4>
-
-    
-
-
-
-    <div class="description">
-        <p>Handle raw datastore has recently read from local file, return new datastore by you want</p>
-    </div>
-
-
-
-
-
-
-
-
-
-    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
-        <strong>Parameters:</strong>
-        
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>rawConfig</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Raw config before assign to plugin (plugin.config = ...)</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>rawUserdata</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Raw userdata before assign to plugin (plugin.userdata = ...)</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    </div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source"><ul class="dummy"><li>
-                <a href="Plugin.js.html">Plugin.js</a>, <a href="Plugin.js.html#line31">line 31</a>
-            </li></ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="method-member-container mt-20">
-    <strong>Returns:</strong>
-        
-            
-<div class="param-desc">
-    <p>New datastore after handle</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
-
-            
-    </div>
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="load">
-        <a href="#load">#</a>
-        <span class="type-signature">(async, abstract) </span>load<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span>
-    </h4>
-
-    
-
-
-
-    <div class="description">
-        <p>Called after this plugin is constructored (you would wrap your &quot;async this.commands.add(command)&quot; in this function in order to load commands in synchronous)</p>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source"><ul class="dummy"><li>
-                <a href="Plugin.js.html">Plugin.js</a>, <a href="Plugin.js.html#line68">line 68</a>
-            </li></ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="method-member-container mt-20">
-    <strong>Returns:</strong>
-        
-            
-<div class="param-desc">
-    <p>[description]</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-
-            
-    </div>
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="onDisable">
-        <a href="#onDisable">#</a>
-        <span class="type-signature">(abstract) </span>onDisable<span class="signature">()</span><span class="type-signature"></span>
-    </h4>
-
-    
-
-
-
-    <div class="description">
-        <p>Called when this plugin is disabled</p>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source"><ul class="dummy"><li>
-                <a href="Plugin.js.html">Plugin.js</a>, <a href="Plugin.js.html#line81">line 81</a>
-            </li></ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="onEnable">
-        <a href="#onEnable">#</a>
-        <span class="type-signature">(abstract) </span>onEnable<span class="signature">()</span><span class="type-signature"></span>
-    </h4>
-
     
-
-
-
-    <div class="description">
-        <p>Called when this plugin is enabled</p>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source"><ul class="dummy"><li>
-                <a href="Plugin.js.html">Plugin.js</a>, <a href="Plugin.js.html#line87">line 87</a>
-            </li></ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="preSaveDatastore">
-        <a href="#preSaveDatastore">#</a>
-        <span class="type-signature"></span>preSaveDatastore<span class="signature">(rawConfig, rawUserdata)</span><span class="type-signature"> &rarr; {Object}</span>
-    </h4>
-
-    
-
-
-
-    <div class="description">
-        <p>Pre save raw datastore recently modified from runtime, return new datastore by you want</p>
-    </div>
-
-
-
-
-
-
-
-
-
-    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
-        <strong>Parameters:</strong>
-        
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>rawConfig</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Raw config (Note: This variable is candy code and reference to this.config)</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>rawUserdata</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Raw userdata (Note: This variable is candy code and reference to this.userdata)</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    </div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source"><ul class="dummy"><li>
-                <a href="Plugin.js.html">Plugin.js</a>, <a href="Plugin.js.html#line41">line 41</a>
-            </li></ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="method-member-container mt-20">
-    <strong>Returns:</strong>
-        
-            
-<div class="param-desc">
-    <p>New datastore</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
-
-            
-    </div>
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="setEnable">
-        <a href="#setEnable">#</a>
-        <span class="type-signature"></span>setEnable<span class="signature">()</span><span class="type-signature"></span>
-    </h4>
-
-    
-
-
-
-    <div class="description">
-        <p>Sets the enabled state of this plugin</p>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class="details-item-container">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source"><ul class="dummy"><li>
-                <a href="Plugin.js.html">Plugin.js</a>, <a href="Plugin.js.html#line92">line 92</a>
-            </li></ul></dd>
-        </div>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Màu mè, hoa lá cho terminal&lt;br>
+ * Hướng dẫn sử dụng:&lt;br>
+ * &lt;code>import {Logger, initLogger} from "./console.util.js"&lt;/code>
+ * @module CONSOLE
+ */
+import chalk from "chalk"
+
+let prefixTag = []
+const defaultFn = () => "null"
+
+export class ChalkObject {
+	constructor(message, chalkOptions) {
+		this.message = message
+		this.options = chalkOptions
+	}
+
+	get isObject() {
+		return typeof this.message == "object"
+	}
+
+	get isError() {
+		return this.message &amp;&amp; this.message.stack &amp;&amp; this.message.message
+	}
+
+	get chalkFunc() {
+		return recursiveGet(chalk, this.options, defaultFn)
+	}
+
+	get chalkText() {
+		if (this.message) {
+			let message
+			if (this.isError) message = this.message.stack
+			else
+				message = this.isObject
+					? JSON.stringify(this.message, null, 2)
+					: this.message
+
+			return this.chalkFunc(message)
+		}
+		return ""
+	}
+}
+
+export function setPrefix(prefix, opts = []) {
+	return (prefixTag = [new ChalkObject(prefix, opts)])
+}
+
+function chalkLog(...objects) {
+	// console.log(getCallerFile(3), 111)
+	const prefixText = prefixTag.map(prefix => prefix.chalkText).join(" ")
+	let logText = ""
+	for (const chalkObject of objects) {
+		if (chalkObject.isObject) {
+			logText += chalkObject.chalkText + "\n\n"
+		} else {
+			logText += chalkObject.chalkText + " "
+		}
+	}
+	console.log(prefixText, logText)
+}
+
+function recursiveGet(object, address) {
+	if (address.length &lt;= 1) {
+		return object[address[0]]
+	}
+	return recursiveGet(object[address[0]], address.slice(1))
+}
+
+export function log(...messages) {
+	chalkLog([
+		messages.map(message => {
+			return [message, ["white"]]
+		})
+	])
+}
+
+export function debug(...messages) {
+	chalkLog(
+		new ChalkObject("DEBUG", ["white", "bgCyan"]),
+		...messages.map(message => new ChalkObject(message, ["cyan"]))
+	)
+}
+
+export function error(...messages) {
+	chalkLog(
+		new ChalkObject("ERROR", ["white", "bgRed"]),
+		...messages.map(message => new ChalkObject(message, ["red"]))
+	)
+}
+
+export function done(...messages) {
+	chalkLog(
+		new ChalkObject("DONE", ["white", "bgGreen"]),
+		...messages.map(message => new ChalkObject(message, ["green"]))
+	)
+}
+
+export function success(...messages) {
+	chalkLog(
+		new ChalkObject("SUCCESS", ["white", "bgGreen"]),
+		...messages.map(message => new ChalkObject(message, ["green"]))
+	)
+}
+
+export function warn(...messages) {
+	chalkLog(
+		new ChalkObject("WARN", ["white", "bgYellow"]),
+		...messages.map(message => new ChalkObject(message, ["yellow"]))
+	)
+}
+
+export function setTerminalTitle(text) {
+	process.stdout.write(
+		`${String.fromCharCode(27)}]0${text}${String.fromCharCode(7)}`
+	)
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

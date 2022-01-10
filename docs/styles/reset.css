@@ -201,7 +201,6 @@ ol.linenums li {
 .details pre.prettyprint {
     margin: 0;
 }
-
 /* stylelint-enable */
 
 .details .object-value {
@@ -243,7 +242,7 @@ ol.linenums li {
     padding: 1rem 2rem;
 }
 
-.prettyprint>code {
+.prettyprint > code {
     padding: 30px;
 }
 
@@ -267,12 +266,12 @@ ol.linenums li {
     user-select: none;
 }
 
-.prettyprint.linenums>div {
+.prettyprint.linenums > div {
     margin-top: 1.6rem;
     padding-left: 4.7rem;
 }
 
-.prettyprint>div {
+.prettyprint > div {
     overflow: auto;
 }
 
@@ -293,7 +292,6 @@ ol.linenums li {
 .prettyprint.linenums li.selected * {
     padding: 1px;
 }
-
 /* stylelint-enable */
 
 .prettyprint.linenums li * {
@@ -345,14 +343,14 @@ td {
     font-weight: bold;
 }
 
-.params td.description>p:first-child,
-.props td.description>p:first-child {
+.params td.description > p:first-child,
+.props td.description > p:first-child {
     margin-top: 0;
     padding-top: 0;
 }
 
-.params td.description>p:last-child,
-.props td.description>p:last-child {
+.params td.description > p:last-child,
+.props td.description > p:last-child {
     margin-bottom: 0;
     padding-bottom: 0;
 }
