@@ -63,6 +63,7 @@ class Plugin {
 	/**
 	 * Called after this plugin is constructored (you would wrap your "async this.commands.add(command)" in this function in order to load commands in synchronous)
 	 * @abstract
+	 * @async
 	 * @return {Promise} [description]
 	 */
 	async load() {
@@ -73,6 +74,13 @@ class Plugin {
 		// 	import("../..")
 		// ])).map(mod => mod.default)
 	}
+
+	/**
+	 * Called in every message (include replying message)
+	 * @abstract
+	 * @async
+	 */
+	async hook() {}
 
 	/**
 	 * Called when this plugin is disabled

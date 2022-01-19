@@ -114,6 +114,7 @@ export default async function hook(err, message) {
 				)}\nBạn có thể xem danh sách lệnh ở ${thread.prefix}help`
 			}
 		}
+		await Promise.all(pluginManager.map(plugin => plugin.hook(thread, message, reply, api)))
 		break
 	}
 	case "event":
