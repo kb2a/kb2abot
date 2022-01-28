@@ -4,35 +4,37 @@
  * <code>import {Logger, initLogger} from "./console.util.js"</code>
  * @module CONSOLE
  */
-import chalk from "chalk"
+import {Chalk} from "chalk"
+import supportsColor from "supports-color"
+
+let chalk = new Chalk({level: 0})
+
+if (supportsColor.stderr.has16m)
+	chalk = new Chalk({level: 3})
+else if (supportsColor.stdout.has256)
+	chalk = new Chalk({level: 2})
+else if (supportsColor.stdout)
+	chalk = new Chalk({level: 1})
 
 let prefixTag = []
-const defaultFn = () => "null"
 
-export class ChalkObject {
+export class Label {
 	constructor(message, chalkOptions) {
 		this.message = message
 		this.options = chalkOptions
 	}
 
-	get isObject() {
-		return typeof this.message == "object"
-	}
-
-	get isError() {
-		return this.message && this.message.stack && this.message.message
-	}
-
 	get chalkFunc() {
-		return recursiveGet(chalk, this.options, defaultFn)
+		return recursiveRef(chalk, this.options)
 	}
 
-	get chalkText() {
+	get text() {
 		if (this.message) {
 			let message
-			if (this.isError) message = this.message.stack
+			if (isError(this.message))
+				message = this.message.stack
 			else
-				message = this.isObject
+				message = typeof this.message == "object"
 					? JSON.stringify(this.message, null, 2)
 					: this.message
 
@@ -42,71 +44,52 @@ export class ChalkObject {
 	}
 }
 
-export function setPrefix(prefix, opts = []) {
-	return (prefixTag = [new ChalkObject(prefix, opts)])
-}
-
 function chalkLog(...objects) {
-	// console.log(getCallerFile(3), 111)
-	const prefixText = prefixTag.map(prefix => prefix.chalkText).join(" ")
-	let logText = ""
-	for (const chalkObject of objects) {
-		if (chalkObject.isObject) {
-			logText += chalkObject.chalkText + "\n\n"
-		} else {
-			logText += chalkObject.chalkText + " "
-		}
-	}
-	console.log(prefixText, logText)
+	console.log([].concat(prefixTag, objects).map(label => label.text).join(" "))
 }
 
-function recursiveGet(object, address) {
-	if (address.length <= 1) {
-		return object[address[0]]
-	}
-	return recursiveGet(object[address[0]], address.slice(1))
+export function setPrefix(prefix, opts = []) {
+	return (prefixTag = [new Label(prefix, opts)])
 }
 
 export function log(...messages) {
-	chalkLog([
-		messages.map(message => {
-			return [message, ["white"]]
-		})
-	])
+	chalkLog(
+		...messages.map(message => message instanceof Label ? message : new Label(message, ["white"]))
+	)
 }
 
 export function debug(...messages) {
 	chalkLog(
-		new ChalkObject("DEBUG", ["white", "bgCyan"]),
-		...messages.map(message => new ChalkObject(message, ["cyan"]))
+		new Label("DEBUG", ["white", "bgCyan"]),
+		...messages.map(message => message instanceof Label ? message : new Label(message, ["cyan"]))
 	)
 }
 
 export function error(...messages) {
 	chalkLog(
-		new ChalkObject("ERROR", ["white", "bgRed"]),
-		...messages.map(message => new ChalkObject(message, ["red"]))
+		new Label("ERROR", ["white", "bgRed"]),
+		...messages.map(message => message instanceof Label ? message : new Label(message, ["red"]))
 	)
 }
 
 export function done(...messages) {
 	chalkLog(
-		new ChalkObject("DONE", ["white", "bgGreen"]),
-		...messages.map(message => new ChalkObject(message, ["green"]))
+		new Label("DONE", ["white", "bgGreen"]),
+		...messages.map(message => message instanceof Label ? message : new Label(message, ["green"]))
 	)
 }
 
 export function success(...messages) {
 	chalkLog(
-		new ChalkObject("SUCCESS", ["white", "bgGreen"]),
-		...messages.map(message => new ChalkObject(message, ["green"]))
+		new Label("SUCCESS", ["white", "bgGreen"]),
+		...messages.map(message => message instanceof Label ? message : new Label(message, ["green"]))
 	)
 }
 
 export function warn(...messages) {
 	chalkLog(
-		new ChalkObject("WARN", ["white", "bgYellow"]),
-		...messages.map(message => new ChalkObject(message, ["yellow"]))
+		new Label("WARN", ["white", "bgYellow"]),
+		...messages.map(message => message instanceof Label ? message : new Label(message, ["yellow"]))
 	)
 }
 
@@ -114,4 +97,16 @@ export function setTerminalTitle(text) {
 	process.stdout.write(
 		`${String.fromCharCode(27)}]0${text}${String.fromCharCode(7)}`
 	)
+}
+
+export function isError(errObj) {
+	return Boolean(errObj.message && errObj.stack && errObj.message)
+}
+
+
+
+function recursiveRef(object, address) {
+	if (address.length <= 1)
+		return object[address[0]]
+	return recursiveRef(object[address[0]], address.slice(1))
 }

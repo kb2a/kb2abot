@@ -1,10 +1,12 @@
 import stringSimilarity from "string-similarity"
 import Thread from "./models/Thread.js"
+import {error} from "../../util/logger.js"
+import * as Label from "./label.js"
 // import {google, detect} from "../../util/translate.js"
 
 export default async function hook(err, message) {
 	const {config, api, pluginManager} = this
-	if (err) return console.error(err)
+	if (err) return error(Label.fca, "fca listenMqtt error:", err)
 	if (!message) return
 
 	/**
@@ -27,48 +29,6 @@ export default async function hook(err, message) {
 		return await api.sendMessage(text, threadID, messageID)
 	}
 
-	const executeCommand = async (thread, command) => {
-		const permission =
-			command.permission[message.threadID] || command.permission["*"] || []
-
-		if (permission != "*" && !config.superAdmins.includes(message.senderID)) {
-			if (permission == "superAdmin") return "Bạn không thể sử dụng lệnh này!"
-			if (permission == "admin") {
-				try {
-					if (
-						(!config.refreshAdminIDs && thread.adminIDs.length == 0) ||
-						config.refreshAdminIDs
-					) {
-						const info =
-							thread.adminIDs || (await api.getThreadInfo(thread.id))
-						thread.adminIDs = info.adminIDs
-					}
-					if (thread.adminIDs.includes(message.senderID))
-						return "Chỉ admin mới có thể xài lệnh này!"
-				} catch (e) {
-					console.error(`Error while getting thread ${thread.id}'s info:`, e)
-					return "Gặp lỗi khi đang lấy danh sách admin, vui lòng thử lại trong giây lát . . ."
-				}
-			}
-			if (Array.isArray(permission)) {
-				if (!permission.includes(message.senderID))
-					return "Bạn không có quyền sử dụng lệnh này!"
-			} else {
-				console.error(
-					`Wrong syntax for permission on command: "${command.keywords[0]}"`
-				)
-				return `Lệnh ${command.keywords[0]} này chưa được phân quyền`
-			}
-		}
-
-		try {
-			return await command.onCall(thread, message, reply, api)
-		} catch (e) {
-			// console.error(e)
-			return e.stack
-		}
-	}
-
 	switch (message.type) {
 	case "message_reply":
 	case "message": {
@@ -82,13 +42,55 @@ export default async function hook(err, message) {
 				.map(plugin => plugin.commands.recursiveFind(address))
 				.flat()
 			if (commands.length == 1) {
-				try {
-					const result = await executeCommand(thread, commands[0], reply)
-					await thread.save()
-					return result
-				} catch (e) {
-					console.log(e)
+				const command = commands[0]
+				const permission = command.permission[message.threadID] || command.permission["*"] || []
+				if (permission != "*" && !config.superAdmins.includes(message.senderID)) {
+					if (permission == "superAdmin") return "Bạn không thể sử dụng lệnh này!"
+					if (permission == "admin") {
+						if (
+							(!config.refreshAdminIDs && thread.adminIDs.length == 0) ||
+							config.refreshAdminIDs
+						) {
+							try {
+								const info =
+									thread.adminIDs || (await api.getThreadInfo(thread.id))
+								thread.adminIDs = info.adminIDs
+							}
+							catch (err) {
+								error(Label.fca, `Error while getting thread ${thread.id}'s info:`, err)
+								return "Gặp lỗi khi đang lấy danh sách admin, vui lòng thử lại trong giây lát . . ."
+							}
+						}
+						if (thread.adminIDs.includes(message.senderID))
+							return "Chỉ admin mới có thể xài lệnh này!"
+					}
+					if (Array.isArray(permission)) {
+						if (!permission.includes(message.senderID))
+							return "Bạn không có quyền sử dụng lệnh này!"
+					} else {
+						error(
+							Label.internalHook,
+							`Syntax Error for field "permission" at command: "${command.keywords[0]}"`
+						)
+						return `Lệnh ${command.keywords[0]} này chưa được phân quyền`
+					}
 				}
+				let result
+				try {
+					result = await command.onCall(thread, message, reply, api)
+				}
+				catch(err) {
+					error(Label.internalHook, "Error while executing onCall command method:", err)
+					return `Gặp lỗi khi đang thực thi: ${err.message}`
+				}
+				try {
+					await thread.save()
+				}
+				catch(err) {
+					error(Label.datastore, "Error while saving thread storage:", err)
+					return `Gặp lỗi khi đang lưu storage cho thread: ${err.message}`
+				}
+				return result
 			}
 			if (commands.length > 1)
 				return `Có ${commands.length} lệnh: ${commands
@@ -114,7 +116,15 @@ export default async function hook(err, message) {
 				)}\nBạn có thể xem danh sách lệnh ở ${thread.prefix}help`
 			}
 		}
-		await Promise.all(pluginManager.map(plugin => plugin.hook(thread, message, reply, api)))
+		for (const plugin of pluginManager) {
+			try {
+				await plugin.hook(thread, message, reply, api)
+			}
+			catch(err) {
+				error(Label.pluginHook, `Error while executing ${plugin.package.name} hook:`, err)
+			}
+		}
+		
 		break
 	}
 	case "event":

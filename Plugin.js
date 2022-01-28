@@ -10,11 +10,8 @@ class Plugin {
 	});
 
 	package = {}; // Add your parsed package.json to this field. Ex: JSON.parse(readFileSync("package.json"))
-	config = {}; // Gets a configuration for this plugin, read through "config.json" (PluginManager auto provide)
-	userdata = {}; // Gets a userdata for this plugin, read through "userdata.json"  (PluginManager auto provide)
-
-	configTemplate = {};
-	userdataTemplate = {};
+	config = {}; // Gets a configuration for this plugin, read through "<package>@<author>@<version>config.json" (PluginManager auto provide)
+	userdata = {}; // Gets a userdata for this plugin, read through "<package>@<author>@<version>userdata.json"  (PluginManager auto provide)
 
 	constructor(options = {}) {
 		this.cache = new NodeCache({

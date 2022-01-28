@@ -7,6 +7,7 @@
  * @module Util.Fca
  */
 import fetch from "node-fetch"
+import {isError} from "./logger.js"
 
 export const callbackKeys = [
 	"addUserToGroup",
@@ -80,14 +81,20 @@ export function promisify(fca) {
 	for (const method of callbackKeys) {
 		functions[method] = (...args) =>
 			new Promise((resolve, reject) => {
-				fca[method](...args, (err, result) => {
-					err ? reject(new Error(err)) : resolve(result)
-				})
+				try {
+					fca[method](...args, (err, result) => {
+						err ? reject(isError(err) ? err : new Error(err.errorDescription ? err.errorDescription : err.error)) : resolve(result)
+					})
+				}
+				catch(err) {
+					reject(new TypeError(isError(err) ? err : new Error(err.error)))
+				}
 			})
 	}
 	for (const method of normalKeys) {
 		functions[method] = (...args) => fca[method](...args)
 	}
+
 	functions.sendMessage = (message, threadID, messageID) => {
 		return new Promise((resolve, reject) => {
 			fca.sendMessage(
@@ -100,24 +107,29 @@ export function promisify(fca) {
 			)
 		})
 	}
+
+	functions.fetch = async (url, noHeadersOption = {}, extendedHeaders = {}) => {
+		const cookie = stringifyAppstate(await fca.getAppState())
+		return await fetch(url, {
+			headers: {
+				"User-Agent":
+					"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/600.3.18 (KHTML, like Gecko) Version/8.0.3 Safari/600.3.18",
+				cookie,
+				...extendedHeaders
+			},
+			...noHeadersOption
+		})
+	}
+
 	functions.getToken = async () => {
-		let stringifyCookie = ""
-		const appstate = fca.getAppState()
-		for (const e of appstate) {
-			stringifyCookie += e.toString().split(";")[0] + ";"
-		}
-		const data = await (
-			await fetch("https://business.facebook.com/business_locations", {
-				headers: {
-					"User-Agent":
-						"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/600.3.18 (KHTML, like Gecko) Version/8.0.3 Safari/600.3.18",
-					cookie: stringifyCookie
-				}
-			})
-		).text()
+		const data = await (await functions.fetch("https://business.facebook.com/business_locations")).text()
 		const first = /LMBootstrapper(.*?){"__m":"LMBootstrapper"}/.exec(data)[1]
 		const second = /"],\["(.*?)","/.exec(first)[1]
 		return second
 	}
 	return functions
+}
+
+export function stringifyAppstate(appstate) {
+	return appstate.map(e => `${e.key}=${e.value}`).join(";")
 }

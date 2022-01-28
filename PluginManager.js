@@ -21,10 +21,13 @@ class PluginManager extends Manager {
 			throw new Error(`Config or userdata directory is not exists: (${this.configDir}, ${this.userdataDir})`)
 	}
 
-	datastorePaths(plugin) {
+	datastoreInf(plugin) {
+		const {name, author, version} = plugin.package
+		const identify = `${name}@${author}@${version}`
 		return {
-			config: path.join(this.configDir, `${plugin.package.name}@${plugin.package.author}.config.json`),
-			userdata: path.join(this.userdataDir, `${plugin.package.name}@${plugin.package.author}.userdata.json`)
+			identify,
+			config: path.join(this.configDir, `${identify}.config.json`),
+			userdata: path.join(this.userdataDir, `${identify}.userdata.json`)
 		}
 	}
 
@@ -34,10 +37,10 @@ class PluginManager extends Manager {
 	 * @return {object}  The plugin's config and userdata
 	 */
 	readDatastore(plugin) {
-		const paths = this.datastorePaths(plugin)
+		const dinf = this.datastoreInf(plugin)
 		return {
-			config: fs.existsSync(paths.config) ? readJSON(paths.config) : {},
-			userdata: fs.existsSync(paths.userdata) ? readJSON(paths.userdata) : {}
+			config: fs.existsSync(dinf.config) ? readJSON(dinf.config) : {},
+			userdata: fs.existsSync(dinf.userdata) ? readJSON(dinf.userdata) : {}
 		}
 	}
 
@@ -45,12 +48,12 @@ class PluginManager extends Manager {
 	 * Save plugin config to local file
 	 */
 	saveDatastore(plugin) {
-		const paths = this.datastorePaths(plugin)
+		const dinf = this.datastoreInf(plugin)
 		const {config, userdata} = plugin.preSaveDatastore(plugin.config, plugin.userdata)
 		// Remove the circular structure
 		const replacer = (key, value) => value === "[Circular]" ? undefined : value
-		fs.writeFileSync(paths.config, safeStringify(config, replacer, "\t"))
-		fs.writeFileSync(paths.userdata, safeStringify(userdata, replacer, "\t"))
+		fs.writeFileSync(dinf.config, safeStringify(config, replacer, "\t"))
+		fs.writeFileSync(dinf.userdata, safeStringify(userdata, replacer, "\t"))
 	}
 
 	/**
@@ -67,7 +70,7 @@ class PluginManager extends Manager {
 					throw new Error(
 						`Missing field "package" for plugin with constructor name: "${plugin.constructor.name}", you need to add your parsed package.json`
 					)
-				plugin.id = `${plugin.package.name}@${plugin.package.author}`
+				plugin.id = this.datastoreInf(plugin).identify
 				if (this.get(plugin.id))
 					throw new Error(`Plugin "${plugin.id}" is already added`)
 				return plugin.load()

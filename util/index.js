@@ -1,5 +1,5 @@
 export * as common from "./common.js"
 export * as fca from "./fca.js"
 export * as Manager from "./Manager.js"
-export * as Logger from "./Logger.js"
+export * as Logger from "./logger.js"
 export * as translate from "./translate.js"

@@ -1,5 +1,6 @@
 import login from "./login.js"
 import hook from "./hook.js"
+import {warn, error} from "../../util/logger"
 
 //                         _ooOoo_
 //                        o8888888o
@@ -40,21 +41,24 @@ export default async (credential, options) => {
 	for (const plugin of pluginManager)
 		if (plugin.isInternal) plugin.pluginManager = pluginManager
 	client.api.listenMqtt(async (err, message) => {
+		let result
 		try {
-			const result = await hooker.bind({
+			result = await hooker.bind({
 				api: client.api,
 				config: pluginOptions,
 				pluginManager
 			})(err, message)
-			if (result)
-				await client.api.sendMessage(
-					result,
-					message.threadID,
-					message.messageID
-				)
 		} catch (err) {
-			console.error(err)
-		}
+			warn("Hook function should not throw promise error, if you are not doing this , may be it is just a normal error come from its self or plugin source.")
+			error(err)
+		}	
+		if (result) try {
+			await client.api.sendMessage(
+				result,
+				message.threadID,
+				message.messageID
+			)
+		} catch {}
 	})
 	return client
 }
