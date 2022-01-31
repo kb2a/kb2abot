@@ -309,3 +309,12 @@ export function readJSON(thePath) {
 export function readHJSON(thePath) {
 	return HJSON.parse(fs.readFileSync(thePath).toString())
 }
+
+/**
+ * Check if an url is valid
+ * @param  {text} input Input URL
+ * @return {Boolean}    is URL or not
+ */
+export function isUrlValid(input) {
+	return input.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g) === null ? false : true
+}
