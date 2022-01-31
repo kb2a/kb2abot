@@ -1,4 +1,3 @@
-import NodeCache from "node-cache"
 import Manager from "./util/Manager.js"
 
 /**
@@ -22,10 +21,8 @@ class Command extends Manager {
 		const {plugin, parentCmd, isPrimary = false} = options
 		this.plugin = plugin
 		this.parentCmd = parentCmd
-		this.cache = new NodeCache({
-			stdTTL: 600
-		})
 		this.isPrimary = isPrimary
+		this.data = {}
 	}
 
 	/**
@@ -114,7 +111,7 @@ class Command extends Manager {
 	}
 
 	/**
-	 * Called after this command is constructored, you would wrap your "async this.add(command)" in this function in order to load commands in synchronous
+	 * Called after this command is constructored, you can put "await this.add(command)" in this function to load commands in synchronous
 	 * @async
 	 * @return {Promise}
 	 */

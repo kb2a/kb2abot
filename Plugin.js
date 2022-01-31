@@ -1,4 +1,3 @@
-import NodeCache from "node-cache"
 import Command from "./Command.js"
 
 /** Class representing a Plugin */
@@ -14,9 +13,7 @@ class Plugin {
 	userdata = {}; // Gets a userdata for this plugin, read through "<package>@<author>@<version>userdata.json"  (PluginManager auto provide)
 
 	constructor(options = {}) {
-		this.cache = new NodeCache({
-			stdTTL: 600
-		})
+		this.data = {}
 	}
 
 	/**
