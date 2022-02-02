@@ -3,9 +3,9 @@
 	<a href="#"><img src="https://i.imgur.com/u6eJA84.png" alt="kb2abot"></a>
 </h1>
 <p align="center">
-	<img alt="size" src="https://img.shields.io/github/repo-size/kb2ateam/kb2abot-core.svg?style=flat-square&label=size">
+	<img alt="size" src="https://img.shields.io/github/repo-size/kb2ateam/kb2abot.svg?style=flat-square&label=size">
 	<img alt="code-version" src="https://img.shields.io/badge/dynamic/json?color=red&label=code%20version&prefix=v&query=%24.version&url=https://raw.githubusercontent.com/kb2ateam/kb2abot/main/package.json&style=flat-square">
-	<img alt="visitors" src="https://visitor-badge.laobi.icu/badge?page_id=kb2ateam.kb2abot-core" />
+	<img alt="visitors" src="https://visitor-badge.laobi.icu/badge?page_id=kb2ateam.kb2abot" />
 	<a href="https://www.codefactor.io/repository/github/kb2ateam/kb2abot"><img src="https://www.codefactor.io/repository/github/kb2ateam/kb2abot/badge" alt="CodeFactor" /></a>
 </p>
 
@@ -96,7 +96,7 @@ import {readHJSON} from "kb2abot/util/common"
 Datastore.init("./datastores") // If you dont init datastore, your bot will be freeze and throw timeout error
 const botOptions = readHJSON("./bot.hjson") // Read and parse bot.hjson file (relative to cwd)
 ```
-**botOptions** is the options of your bot (see the example template at [example-bot.hjson](https://github.com/kb2ateam/kb2abot-bootloader/blob/npm-based-plugin/bots/example-bot.hjson)
+**botOptions** is the options of your bot (see the example template at [example-bot.hjson](https://github.com/kb2ateam/kb2abot-client/blob/main/bots/example-bot.hjson)
 ```js
 const client = await Deploy.facebook(botOptions.credential, {
 	apiOptions: botOptions.fcaOptions,
@@ -106,7 +106,7 @@ const client = await Deploy.facebook(botOptions.credential, {
 All done! Now, imagine a user sending a message with body: "/report Hello admin", the bot will reply "Sent: Hello admin". Now you can code what you want and create a wonderful bot 🌟
 ## Links
 
-- [Documentation](https://kb2ateam.github.io/kb2abot-core/)
+- [Documentation](https://kb2ateam.github.io/kb2abot/)
 - [npm](https://www.npmjs.com/package/kb2abot)
 
 ## Contributing

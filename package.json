@@ -1,7 +1,7 @@
 {
   "name": "kb2abot",
   "type": "module",
-  "version": "3.0.0",
+  "version": "1.0.0",
   "description": "kb2abot is a powerful Node.js module that allows you to easily interact with the Facebook Chat API and more!",
   "main": "index.js",
   "scripts": {
