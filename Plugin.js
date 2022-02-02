@@ -70,6 +70,13 @@ class Plugin {
 	}
 
 	/**
+	 * Called in when logged in successfully
+	 * @abstract
+	 * @async
+	 */
+	async onLogin() {}
+
+	/**
 	 * Called in every message (include replying message)
 	 * @abstract
 	 * @async

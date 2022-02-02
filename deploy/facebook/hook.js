@@ -81,7 +81,7 @@ export default async function hook(err, message) {
 				}
 				catch(err) {
 					error(Label.internalHook, "Error while executing onCall command method:", err)
-					return `Gặp lỗi khi đang thực thi: ${err.message}`
+					return `Gặp lỗi khi đang thực thi ${message.body}:\n${err.message}`
 				}
 				try {
 					await thread.save()

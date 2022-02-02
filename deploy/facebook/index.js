@@ -37,6 +37,11 @@ export default async (credential, options) => {
 		pluginManager = []
 	} = options
 	const client = await login(credential, apiOptions)
+
+	// Triggering onLogin event
+	for (const plugin of pluginManager)
+		await plugin.onLogin(client.api)
+
 	const hooker = externalHook || hook
 	for (const plugin of pluginManager)
 		if (plugin.isInternal) plugin.pluginManager = pluginManager
