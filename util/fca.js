@@ -61,12 +61,9 @@ export const normalKeys = [
  */
 export function getUsername(fblink) {
 	let temp = ""
-	if (fblink.includes("?id="))
-		temp = /id=(.*?)$/.exec(fblink)[1]
-	else
-		temp = /.com\/(.*?)$/.exec(fblink)[1]
-	if (temp.includes("/"))
-		return temp.slice(0, temp.indexOf("/"))
+	if (fblink.includes("?id=")) temp = /id=(.*?)$/.exec(fblink)[1]
+	else temp = /.com\/(.*?)$/.exec(fblink)[1]
+	if (temp.includes("/")) return temp.slice(0, temp.indexOf("/"))
 	return temp
 }
 
@@ -83,10 +80,17 @@ export function promisify(fca) {
 			new Promise((resolve, reject) => {
 				try {
 					fca[method](...args, (err, result) => {
-						err ? reject(isError(err) ? err : new Error(err.errorDescription ? err.errorDescription : err.error)) : resolve(result)
+						err
+							? reject(
+								isError(err)
+									? err
+									: new Error(
+										err.errorDescription ? err.errorDescription : err.error
+										  )
+							  )
+							: resolve(result)
 					})
-				}
-				catch(err) {
+				} catch (err) {
 					reject(new TypeError(isError(err) ? err : new Error(err.error)))
 				}
 			})
@@ -122,7 +126,9 @@ export function promisify(fca) {
 	}
 
 	functions.getToken = async () => {
-		const data = await (await functions.fetch("https://business.facebook.com/business_locations")).text()
+		const data = await (
+			await functions.fetch("https://business.facebook.com/business_locations")
+		).text()
 		const first = /LMBootstrapper(.*?){"__m":"LMBootstrapper"}/.exec(data)[1]
 		const second = /"],\["(.*?)","/.exec(first)[1]
 		return second

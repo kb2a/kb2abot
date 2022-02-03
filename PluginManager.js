@@ -2,7 +2,7 @@ import fs from "fs"
 import path from "path"
 import safeStringify from "fast-safe-stringify"
 import Manager from "./util/Manager.js"
-import { readJSON } from "./util/common.js"
+import {readJSON} from "./util/common.js"
 
 /** Class representing a PluginManager - A Manager for plugins */
 class PluginManager extends Manager {
@@ -18,7 +18,9 @@ class PluginManager extends Manager {
 		this.configDir = path.join(process.cwd(), configDir)
 		this.userdataDir = path.join(process.cwd(), userdataDir)
 		if (!fs.existsSync(this.configDir) || !fs.existsSync(this.userdataDir))
-			throw new Error(`Config or userdata directory is not exists: (${this.configDir}, ${this.userdataDir})`)
+			throw new Error(
+				`Config or userdata directory is not exists: (${this.configDir}, ${this.userdataDir})`
+			)
 	}
 
 	datastoreInf(plugin) {
@@ -49,9 +51,13 @@ class PluginManager extends Manager {
 	 */
 	saveDatastore(plugin) {
 		const dinf = this.datastoreInf(plugin)
-		const {config, userdata} = plugin.preSaveDatastore(plugin.config, plugin.userdata)
+		const {config, userdata} = plugin.preSaveDatastore(
+			plugin.config,
+			plugin.userdata
+		)
 		// Remove the circular structure
-		const replacer = (key, value) => value === "[Circular]" ? undefined : value
+		const replacer = (key, value) =>
+			value === "[Circular]" ? undefined : value
 		fs.writeFileSync(dinf.config, safeStringify(config, replacer, "\t"))
 		fs.writeFileSync(dinf.userdata, safeStringify(userdata, replacer, "\t"))
 	}
@@ -77,7 +83,9 @@ class PluginManager extends Manager {
 			})
 		)
 		for (const plugin of plugins) {
-			const {config: rawConfig, userdata: rawUserdata} = this.readDatastore(plugin)
+			const {config: rawConfig, userdata: rawUserdata} = this.readDatastore(
+				plugin
+			)
 			const {config, userdata} = plugin.handleDatastore(rawConfig, rawUserdata)
 			plugin.config = config
 			plugin.userdata = userdata

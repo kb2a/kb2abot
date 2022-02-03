@@ -9,7 +9,7 @@ import fetch from "node-fetch"
 import HJSON from "hjson"
 
 /**
- * 
+ *
  * Pause the program with promise wrapped
  * @async
  * @param  {Number} time Time to pause (milis)
@@ -316,5 +316,9 @@ export function readHJSON(thePath) {
  * @return {Boolean}    is URL or not
  */
 export function isUrlValid(input) {
-	return input.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g) === null ? false : true
+	return input.match(
+		/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+	) === null
+		? false
+		: true
 }

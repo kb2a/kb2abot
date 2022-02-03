@@ -43,21 +43,31 @@ export default async function hook(err, message) {
 				.flat()
 			if (commands.length == 1) {
 				const command = commands[0]
-				const permission = command.permission[message.threadID] || command.permission["*"] || []
-				if (permission != "*" && !config.superAdmins.includes(message.senderID)) {
-					if (permission == "superAdmin") return "Bạn không thể sử dụng lệnh này!"
+				const permission =
+						command.permission[message.threadID] ||
+						command.permission["*"] ||
+						[]
+				if (
+					permission != "*" &&
+						!config.superAdmins.includes(message.senderID)
+				) {
+					if (permission == "superAdmin")
+						return "Bạn không thể sử dụng lệnh này!"
 					if (permission == "admin") {
 						if (
 							(!config.refreshAdminIDs && thread.adminIDs.length == 0) ||
-							config.refreshAdminIDs
+								config.refreshAdminIDs
 						) {
 							try {
 								const info =
-									thread.adminIDs || (await api.getThreadInfo(thread.id))
+										thread.adminIDs || (await api.getThreadInfo(thread.id))
 								thread.adminIDs = info.adminIDs
-							}
-							catch (err) {
-								error(Label.fca, `Error while getting thread ${thread.id}'s info:`, err)
+							} catch (err) {
+								error(
+									Label.fca,
+									`Error while getting thread ${thread.id}'s info:`,
+									err
+								)
 								return "Gặp lỗi khi đang lấy danh sách admin, vui lòng thử lại trong giây lát . . ."
 							}
 						}
@@ -78,15 +88,17 @@ export default async function hook(err, message) {
 				let result
 				try {
 					result = await command.onCall(thread, message, reply, api)
-				}
-				catch(err) {
-					error(Label.internalHook, "Error while executing onCall command method:", err)
+				} catch (err) {
+					error(
+						Label.internalHook,
+						"Error while executing onCall command method:",
+						err
+					)
 					return `Gặp lỗi khi đang thực thi ${message.body}:\n${err.message}`
 				}
 				try {
 					await thread.save()
-				}
-				catch(err) {
+				} catch (err) {
 					error(Label.datastore, "Error while saving thread storage:", err)
 					return `Gặp lỗi khi đang lưu storage cho thread: ${err.message}`
 				}
@@ -119,12 +131,15 @@ export default async function hook(err, message) {
 		for (const plugin of pluginManager) {
 			try {
 				await plugin.hook(thread, message, reply, api)
-			}
-			catch(err) {
-				error(Label.pluginHook, `Error while executing ${plugin.package.name} hook:`, err)
+			} catch (err) {
+				error(
+					Label.pluginHook,
+					`Error while executing ${plugin.package.name} hook:`,
+					err
+				)
 			}
 		}
-		
+
 		break
 	}
 	case "event":

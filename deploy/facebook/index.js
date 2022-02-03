@@ -39,8 +39,7 @@ export default async (credential, options) => {
 	const client = await login(credential, apiOptions)
 
 	// Triggering onLogin event
-	for (const plugin of pluginManager)
-		await plugin.onLogin(client.api)
+	for (const plugin of pluginManager) await plugin.onLogin(client.api)
 
 	const hooker = externalHook || hook
 	for (const plugin of pluginManager)
@@ -54,16 +53,19 @@ export default async (credential, options) => {
 				pluginManager
 			})(err, message)
 		} catch (err) {
-			warn("Hook function should not throw promise error, if you are not doing this , may be it is just a normal error come from its self or plugin source.")
-			error(err)
-		}	
-		if (result) try {
-			await client.api.sendMessage(
-				result,
-				message.threadID,
-				message.messageID
+			warn(
+				"Hook function should not throw promise error, if you are not doing this , may be it is just a normal error come from its self or plugin source."
 			)
-		} catch {}
+			error(err)
+		}
+		if (result)
+			try {
+				await client.api.sendMessage(
+					result,
+					message.threadID,
+					message.messageID
+				)
+			} catch {}
 	})
 	return client
 }
