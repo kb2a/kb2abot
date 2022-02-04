@@ -90,6 +90,7 @@ class PluginManager extends Manager {
 			plugin.config = config
 			plugin.userdata = userdata
 			this.saveDatastore(plugin)
+			await plugin.onEnable()
 		}
 		this.push(...plugins)
 	}
